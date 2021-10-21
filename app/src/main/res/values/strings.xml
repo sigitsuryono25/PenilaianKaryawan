@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Penilaian Karyawan</string>
+    <string name="user_id">ID User</string>
+    <string name="password">Password</string>
+    <string name="selamat_datang_di_aplikasi_penilaian_karyawan_nbmt_bima_magelang">Selamat Datang di Aplikasi Penilaian Karyawan\n<font color="#E64A19">BMT BIMA Magelang</font></string>
+    <string name="masuk">Masuk</string>
+    <string name="mengirimkan_data">Megirimkan data..</string>
+    <string name="home">Home</string>
+    <string name="akun">Akun</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="monitoring">Monitoring</string>
+    <string name="pengumuman">Pengumuman</string>
+    <string name="selengkapnya">Selengkapnya</string>
+    <string name="pkp">PKP</string>
+    <string name="logout">Logout</string>
+</resources>

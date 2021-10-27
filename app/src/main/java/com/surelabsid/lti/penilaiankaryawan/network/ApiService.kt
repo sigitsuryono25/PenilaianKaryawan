@@ -1,22 +1,34 @@
 package com.surelabsid.lti.penilaiankaryawan.network
 
 import com.surelabsid.lti.penilaiankaryawan.model.User
-import com.surelabsid.lti.penilaiankaryawan.response.ResponsePengumumanDummy
-import com.surelabsid.lti.penilaiankaryawan.response.ResponseUser
+import com.surelabsid.lti.penilaiankaryawan.response.*
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface ApiService {
 
     @POST("api/user/auth")
     suspend fun auth(@Body user: User): ResponseUser
 
+    @GET("api/user/list")
+    suspend fun getKaryawan(
+        @Query("p") page: Int = 0,
+        @Query("id_jabatan") idJabatan: String?
+    ): ResponseKaryawan
+
+
+    @GET("api/user/jabatan")
+    suspend fun getJabatan(): ResponseJabatan
+
+    @GET("api/penilaian/param")
+    suspend fun getParam(@Query("id_jabatan") idJabatan: String?): ResponseParams
 
     /**
      * testing data
      */
     @GET("get_latest_news")
-    suspend fun getLatestNews() : ResponsePengumumanDummy
+    suspend fun getLatestNews(): ResponsePengumumanDummy
 
 }

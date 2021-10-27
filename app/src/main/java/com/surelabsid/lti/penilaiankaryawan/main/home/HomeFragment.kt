@@ -1,5 +1,6 @@
 package com.surelabsid.lti.penilaiankaryawan.main.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -9,6 +10,7 @@ import com.surelabsid.lti.penilaiankaryawan.R
 import com.surelabsid.lti.penilaiankaryawan.databinding.FragmentHomeBinding
 import com.surelabsid.lti.penilaiankaryawan.main.pengumuman.PengumumanViewModel
 import com.surelabsid.lti.penilaiankaryawan.main.pengumuman.adapter.AdapterPengumuman
+import com.surelabsid.lti.penilaiankaryawan.main.pkp.PkpActivity
 import com.surelabsid.lti.penilaiankaryawan.response.ResponsePengumumanDummy
 import es.dmoral.toasty.Toasty
 
@@ -51,6 +53,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
 
         binding.shimmerPengumuman.startShimmer()
+
+        binding.pkp.setOnClickListener {
+            Intent(requireActivity(), PkpActivity::class.java).apply {
+                startActivity(this)
+            }
+        }
     }
 
     private fun showError(throwable: Throwable) {

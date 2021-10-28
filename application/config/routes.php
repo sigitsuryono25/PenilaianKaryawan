@@ -60,6 +60,8 @@ $route['api/user/list/(:any)'] = "api/Api_user/getAllUser/$1";
 $route['api/user/list'] = "api/Api_user/getAllUser";
 $route['api/user/jabatan'] = "api/Api_user/getJabatan";
 $route['api/penilaian/param'] = "api/Api_params/getParams";
+$route['api/penilaian/received'] = "api/Api_params/receivedPenilaian";
+$route['api/penilaian/get-penilaian'] = "api/Api_params/getPenilaian";
 
 //bidang
 $route['bidang/form-add'] = "Bidang/formAdd";

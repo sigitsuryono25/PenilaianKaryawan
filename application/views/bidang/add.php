@@ -9,6 +9,10 @@
 				<input type="text" name="nama_bidang" class="form-control" required>
 			</div>
 			<div class="form-group">
+				<label >Bobot Bidang</label>
+				<input type="text" name="bobot" class="form-control" required>
+			</div>
+			<div class="form-group">
 				<button type="submit" class="btn btn-sm btn-primary">
 					<i class="fas fa-save "></i>&nbsp;&nbsp;&nbsp;
 					Simpan

@@ -1,5 +1,6 @@
 package com.surelabsid.lti.penilaiankaryawan.network
 
+import com.surelabsid.lti.penilaiankaryawan.model.PenilaianSend
 import com.surelabsid.lti.penilaiankaryawan.model.User
 import com.surelabsid.lti.penilaiankaryawan.response.*
 import retrofit2.http.Body
@@ -24,6 +25,13 @@ interface ApiService {
 
     @GET("api/penilaian/param")
     suspend fun getParam(@Query("id_jabatan") idJabatan: String?): ResponseParams
+
+    @POST("api/penilaian/received")
+    suspend fun sendPenilaian(@Body penilaianSend: PenilaianSend): GeneralResponse
+
+
+    @GET("api/penilaian/get-penilaian")
+    suspend fun getPenilaian(@Query("dinilai_oleh") dinilaiOleh: String?): ResponsePenilaian
 
     /**
      * testing data

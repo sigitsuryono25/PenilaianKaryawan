@@ -3,22 +3,25 @@ package com.surelabsid.lti.penilaiankaryawan.main.pkp.ui
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.InputType
-import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.pixplicity.easyprefs.library.Prefs
 import com.surelabsid.lti.penilaiankaryawan.R
 import com.surelabsid.lti.penilaiankaryawan.databinding.FragmentPenilaianKaryawanBinding
 import com.surelabsid.lti.penilaiankaryawan.main.pkp.PkpViewModel
-import com.surelabsid.lti.penilaiankaryawan.response.DataKaryawanItem
-import com.surelabsid.lti.penilaiankaryawan.response.ResponseParams
+import com.surelabsid.lti.penilaiankaryawan.model.Nilai
+import com.surelabsid.lti.penilaiankaryawan.model.Penilaian
+import com.surelabsid.lti.penilaiankaryawan.model.PenilaianSend
+import com.surelabsid.lti.penilaiankaryawan.response.*
+import com.surelabsid.lti.penilaiankaryawan.utils.Constant
 import es.dmoral.toasty.Toasty
-import kotlin.math.round
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -31,7 +34,14 @@ class PenilaianKaryawan : Fragment(R.layout.fragment_penilaian_karyawan) {
     private lateinit var vm: PkpViewModel
     private var initIndex = 0
     private var bobotList = mutableListOf<String?>()
-    private var bobotBidang : String? = null
+    private var idPoint = mutableListOf<String?>()
+    private var bobotBidang: String? = null
+    private var idBidang: String? = null
+    private var namaBidang: String? = null
+    private var dataParam: List<DataParamItem?>? = null
+    private var penilaianList = mutableListOf<Penilaian>()
+    private var subpoint: List<SubpointItem?>? = listOf<SubpointItem>()
+    private var pointItemItem: List<PointItemItem?>? = listOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +65,17 @@ class PenilaianKaryawan : Fragment(R.layout.fragment_penilaian_karyawan) {
             setError(it)
         }
 
+        vm.generalRes.observe(viewLifecycleOwner) {
+            AlertDialog.Builder(requireActivity())
+                .setMessage(it.message)
+                .setTitle("Info")
+                .setPositiveButton("Oke") { d, _ ->
+//                    requireActivity().finish()
+                    d.dismiss()
+                }
+                .create().show()
+        }
+
         getParams()
 
         binding.lanjut.setOnClickListener {
@@ -64,22 +85,101 @@ class PenilaianKaryawan : Fragment(R.layout.fragment_penilaian_karyawan) {
     }
 
     private fun getAllValues() {
-        val penilaianLayout = binding.containerPenilaian
-        val edtPenilaian = mutableListOf<EditText>()
-        for (i in 0 until penilaianLayout.childCount) {
-            if (penilaianLayout.getChildAt(i) is EditText) {
-                edtPenilaian.add(penilaianLayout.getChildAt(i) as EditText)
+        initIndex++
+        if (initIndex < this.dataParam?.size!!) {
+            val tampunganNilaiSementara = mutableListOf<Nilai>()
+            val penilaianLayout = binding.containerPenilaian
+            val nilaiPerbidang = mutableListOf<Double>()
+            val edtPenilaian = mutableListOf<EditText>()
+            val pairNilaiXIdPoint = hashMapOf<String?, Double>()
+            for (i in 0 until penilaianLayout.childCount) {
+                if (penilaianLayout.getChildAt(i) is EditText) {
+                    edtPenilaian.add(penilaianLayout.getChildAt(i) as EditText)
+                }
             }
+            var jumlah = 0.0
+            edtPenilaian.forEachIndexed { i, it ->
+                val nilai = it.text.toString().toDouble()
+                val b = bobotList[i].toString().toDouble()
+                val akhir = nilai.times(b)
+                nilaiPerbidang.add(akhir)
+                jumlah += akhir
+            }
+
+            idPoint.forEachIndexed { i, d ->
+                pairNilaiXIdPoint[d] = nilaiPerbidang.get(i)
+                val nilai = Nilai()
+                nilai.idPoint = d
+                nilai.nilai = nilaiPerbidang[i]
+
+                tampunganNilaiSementara.add(nilai)
+            }
+
+            val bb = bobotBidang.toString().toDouble()
+            binding.jumlah.visibility = View.GONE
+
+
+            val penilaian = Penilaian()
+            penilaian.pairNilaiXidPoint = tampunganNilaiSementara
+            penilaian.bobotPoint = bobotBidang
+            penilaian.nilaiAKhirPerPoint = String.format("%.2f", jumlah.times(bb))
+            penilaian.idBidang = idBidang
+
+            penilaianList.add(penilaian)
+
+            getPoint(initIndex)
+
+        } else {
+            val tampunganNilaiSementara = mutableListOf<Nilai>()
+            val penilaianLayout = binding.containerPenilaian
+            val nilaiPerbidang = mutableListOf<Double>()
+            val edtPenilaian = mutableListOf<EditText>()
+            val pairNilaiXIdPoint = hashMapOf<String?, Double>()
+            for (i in 0 until penilaianLayout.childCount) {
+                if (penilaianLayout.getChildAt(i) is EditText) {
+                    edtPenilaian.add(penilaianLayout.getChildAt(i) as EditText)
+                }
+            }
+            var jumlah = 0.0
+            edtPenilaian.forEachIndexed { i, it ->
+                val nilai = it.text.toString().toDouble()
+                val b = bobotList[i].toString().toDouble()
+                val akhir = nilai.times(b)
+                nilaiPerbidang.add(akhir)
+                jumlah += akhir
+            }
+
+            idPoint.forEachIndexed { i, d ->
+                pairNilaiXIdPoint[d] = nilaiPerbidang.get(i)
+                val nilai = Nilai()
+                nilai.idPoint = d
+                nilai.nilai = nilaiPerbidang[i]
+
+                tampunganNilaiSementara.add(nilai)
+            }
+
+            val bb = bobotBidang.toString().toDouble()
+            binding.jumlah.visibility = View.GONE
+
+
+            val penilaian = Penilaian()
+            penilaian.pairNilaiXidPoint = tampunganNilaiSementara
+            penilaian.bobotPoint = bobotBidang
+            penilaian.nilaiAKhirPerPoint = String.format("%.2f", jumlah.times(bb))
+            penilaian.idBidang = idBidang
+
+
+            penilaianList.add(penilaian)
+
+            val penilaianSend = PenilaianSend()
+            penilaianSend.userid = param1?.userid
+            penilaianSend.penilaian = penilaianList
+            penilaianSend.dinilaiOleh = Prefs.getString(Constant.USERID)
+
+            vm.sendPenilaian(penilaianSend)
         }
-        var jumlah = 0.0
-        edtPenilaian.forEachIndexed { i, it ->
-            val nilai = it.text.toString().toDouble()
-            val b =  bobotList[i].toString().toDouble()
-            jumlah += (nilai.times(b))
-        }
-        val bb = bobotBidang.toString().toDouble()
-        binding.jumlah.text = "Jumlah: ${round(jumlah.times(bb))}"
     }
+
 
     private fun setError(throwable: Throwable) {
         throwable.printStackTrace()
@@ -87,19 +187,32 @@ class PenilaianKaryawan : Fragment(R.layout.fragment_penilaian_karyawan) {
     }
 
     private fun setToView(responseParams: ResponseParams) {
+        this.dataParam = responseParams.dataParam
+        getPoint(initIndex)
+    }
+
+    private fun getPoint(initIndex: Int) {
         bobotList = mutableListOf()
-        val titleName = responseParams.dataParam?.get(initIndex)?.nama
-        bobotBidang = responseParams.dataParam?.get(initIndex)?.bobotBidang
+        idPoint = mutableListOf()
+        subpoint = listOf()
+        pointItemItem = listOf()
+        val titleName = dataParam?.get(initIndex)?.nama
+        bobotBidang = dataParam?.get(initIndex)?.bobotBidang
+        idBidang = dataParam?.get(initIndex)?.idBidang
+        namaBidang = titleName
         binding.bidang.text = titleName
         binding.bobotBidang.text = "Bobot bidang: $bobotBidang"
-        val point = responseParams.dataParam?.get(initIndex)?.point
+        val point = dataParam?.get(initIndex)?.point
         val params = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
         )
 
         val charA = 96
+        binding.containerPenilaian.removeAllViews()
+        binding.scrollContainer.scrollTo(0, 0)
         point?.forEachIndexed { i, d ->
+
             val urutan = charA.plus(i.plus(1)).toChar()
             val tv = TextView(requireActivity())
             val c = LinearLayout(requireActivity())
@@ -126,6 +239,7 @@ class PenilaianKaryawan : Fragment(R.layout.fragment_penilaian_karyawan) {
 
             //first, add bobot to list
             bobotList.add(d?.bobot)
+            idPoint.add(d?.idPoint)
 
             bobotTextView.text = "Bobot: ${d?.bobot}"
             bobotTextView.setTextColor(
@@ -138,6 +252,9 @@ class PenilaianKaryawan : Fragment(R.layout.fragment_penilaian_karyawan) {
             bobotTextView.typeface = Typeface.DEFAULT_BOLD
             bobotTextView.layoutParams = params
             bobotTextView.gravity = GravityCompat.END
+
+            //asign subpoint
+            subpoint = d?.subpoint
 
             d?.subpoint?.forEachIndexed { i2, d2 ->
                 val subp = TextView(requireActivity())
@@ -157,7 +274,6 @@ class PenilaianKaryawan : Fragment(R.layout.fragment_penilaian_karyawan) {
             )
             containerParams.setMargins(0, 20, 0, 0)
             c.layoutParams = containerParams
-
             binding.containerPenilaian.addView(c, -1)
             binding.containerPenilaian.addView(edittext, -1)
             binding.containerPenilaian.addView(bobotTextView, -1)

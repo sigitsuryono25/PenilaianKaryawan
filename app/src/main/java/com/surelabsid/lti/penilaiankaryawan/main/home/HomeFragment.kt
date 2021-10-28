@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.surelabsid.lti.penilaiankaryawan.R
 import com.surelabsid.lti.penilaiankaryawan.databinding.FragmentHomeBinding
+import com.surelabsid.lti.penilaiankaryawan.main.monitoring.MonitoringActivity
 import com.surelabsid.lti.penilaiankaryawan.main.pengumuman.PengumumanViewModel
 import com.surelabsid.lti.penilaiankaryawan.main.pengumuman.adapter.AdapterPengumuman
 import com.surelabsid.lti.penilaiankaryawan.main.pkp.PkpActivity
@@ -56,6 +57,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         binding.pkp.setOnClickListener {
             Intent(requireActivity(), PkpActivity::class.java).apply {
+                startActivity(this)
+            }
+        }
+
+        binding.monitoring.setOnClickListener {
+            Intent(requireActivity(), MonitoringActivity::class.java).apply {
                 startActivity(this)
             }
         }

@@ -1,11 +1,13 @@
 package com.surelabsid.lti.penilaiankaryawan
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.surelabsid.lti.penilaiankaryawan.databinding.ActivityMainBinding
 import com.surelabsid.lti.penilaiankaryawan.main.akun.AkunFragment
 import com.surelabsid.lti.penilaiankaryawan.main.home.HomeFragment
+import com.surelabsid.lti.penilaiankaryawan.main.pkp.PkpActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -32,6 +34,12 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             return@setOnItemSelectedListener false
+        }
+
+        binding.pkp.setOnClickListener {
+            Intent(this@MainActivity, PkpActivity::class.java).apply {
+                startActivity(this)
+            }
         }
     }
 

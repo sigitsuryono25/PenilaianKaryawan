@@ -1,0 +1,65 @@
+package com.surelabsid.lti.penilaiankaryawan.response
+
+import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+data class ResponsePenilaian(
+
+    @field:SerializedName("code")
+    val code: Int? = null,
+
+    @field:SerializedName("message")
+    val message: String? = null,
+
+    @field:SerializedName("data_penilaian")
+    val dataPenilaian: List<DataPenilaianItem?>? = null
+) : Parcelable
+
+@Parcelize
+data class PairNilaiXidPointItem(
+
+    @field:SerializedName("nilai")
+    val nilai: Double? = null,
+
+    @field:SerializedName("idPoint")
+    val idPoint: String? = null
+) : Parcelable
+
+@Parcelize
+data class DataPenilaianItem(
+
+    @field:SerializedName("dinilai_pada")
+    val dinilaiPada: String? = null,
+
+    @field:SerializedName("id_kar")
+    val idKar: String? = null,
+
+    @field:SerializedName("jabatan_kar")
+    val jabatanKar: String? = null,
+
+    @field:SerializedName("nama_kar")
+    val namaKar: String? = null,
+
+    @field:SerializedName("id_penilai")
+    val idPenilai: String? = null,
+
+    @field:SerializedName("data_penilaian")
+    val dataPenilaian: List<DataPenilaianItem?>? = null,
+
+    @field:SerializedName("nama_penilai")
+    val namaPenilai: String? = null,
+
+    @field:SerializedName("nilaiAKhirPerPoint")
+    val nilaiAKhirPerPoint: String? = null,
+
+    @field:SerializedName("bobotPoint")
+    val bobotPoint: String? = null,
+
+    @field:SerializedName("idBidang")
+    val idBidang: String? = null,
+
+    @field:SerializedName("pairNilaiXidPoint")
+    val pairNilaiXidPoint: List<PairNilaiXidPointItem?>? = null
+) : Parcelable

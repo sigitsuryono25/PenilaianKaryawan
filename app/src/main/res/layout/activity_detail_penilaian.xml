@@ -53,9 +53,10 @@
         android:layout_toStartOf="@id/lanjut"
         android:gravity="center_vertical|start"
         android:paddingHorizontal="10dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@android:color/holo_red_light"
-        android:textStyle="bold" />
+        android:textStyle="bold|italic"
+        android:textSize="14sp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/lanjut"

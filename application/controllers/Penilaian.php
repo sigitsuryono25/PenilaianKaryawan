@@ -19,6 +19,15 @@ class Penilaian extends Basecontroller
 		$this->load->view('template', $master);
 	}
 
+	public function daftarParams()
+	{
+		$data['jabatan'] = $this->jabatan->getAllJabatan()->result();
+		$data['bidang'] = $this->bidang->getAllBidang()->result();
+		$master['page'] = $this->load->view('penilaian/daftar-params', $data, TRUE);
+		$master['title'] = "Daftar Parameter Penilaian";
+		$this->load->view('template', $master);		
+	}
+
 	function insertData()
 	{
 		$json = file_get_contents("php://input");

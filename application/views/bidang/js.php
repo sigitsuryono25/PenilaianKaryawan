@@ -2,7 +2,7 @@
 	var tbBidang = $('#tbBidang').DataTable({
 		'ajax': "<?= site_url('bidang/data-bidang-api') ?>",
 		'columnDefs': [{
-				"targets": 2,
+				"targets": 3,
 				"orderable": false,
 				"data": 'id_bidang',
 				"render": function(data, type, row, meta) {
@@ -12,6 +12,10 @@
 				}
 			},
 			{
+				"targets": 2,
+				"orderable": true,
+				"data": 'bobot',
+			},{
 				"targets": 1,
 				"orderable": true,
 				"data": 'nama_bidang',
@@ -30,11 +34,14 @@
 	});
 	var urlAction = "<?= site_url('bidang/action-add') ?>";
 	$("#formTambahBidang").on("submit", function(e) {
-		e.preventDefault();		
+		e.preventDefault();
 		var dTambah = JSON.stringify(getFormData($(this)));
 		$.post(urlAction, dTambah, function(res) {
 			if (res.code == 200) {
 				alert(res.message);
+				$("#input-id").remove();
+				urlAction = "<?= site_url('bidang/action-add') ?>";
+				$("#formTambahBidang").trigger("reset");
 				tbBidang.ajax.reload();
 			} else {
 				alert(res.message);
@@ -69,14 +76,22 @@
 	}
 
 	function editData(idBidang) {
-		
+		var isExist = $("#formTambahBidang").find("#input-id").length;
+		if (isExist <= 0) {
+			var id = `<input type="hidden" name="id" id="input-id"/>`;
+			$("#formTambahBidang").append(id);
+		}
+		urlAction = "<?= site_url('bidang/action-update') ?>"
 		var urlDetailBidang = "<?= site_url('bidang/get-detail') ?>";
 		var data = {
 			'id_bidang': idBidang
 		};
 
 		$.post(urlDetailBidang, JSON.stringify(data), function(res) {
-			console.log(JSON.stringify(res));
+			$('[name="nama_bidang"]').val(res.data.nama_bidang);
+			$('[name="bobot"]').val(res.data.bobot);
+			$('[name="id"]').val(res.data.id_bidang);
+
 		}, 'json').fail(function(j, e, t) {
 			alert(t);
 			console.error(JSON.stringify(j));

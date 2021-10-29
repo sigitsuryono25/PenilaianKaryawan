@@ -11,6 +11,7 @@
 			<div class="form-group">
 				<label >Bobot Bidang</label>
 				<input type="text" name="bobot" class="form-control" required>
+				<small class="text-danger font-weight-bold">Masukkan angka desimal. Gunakan titik. Contoh 0.40</small>
 			</div>
 			<div class="form-group">
 				<button type="submit" class="btn btn-sm btn-primary">
@@ -33,6 +34,7 @@
 					<tr>
 						<th>#</th>
 						<th>Nama Bidang</th>
+						<th>Bobot Bidang</th>
 						<th>Action</th>
 					</tr>
 				</thead>

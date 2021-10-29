@@ -30,10 +30,12 @@
 							<th class="align-middle">
 								Subpoint
 							</th>
+							<th>Action</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr id="<?= rand() ?>" data-index="0">
+						<?php $r = rand() ?>
+						<tr id="<?= $r ?>" data-index="0">
 							<td class="align-top">
 								<textarea name="isi_point" class="form-control" id="point__0" placeholder="tulis point utama penilaian" required></textarea>
 							</td>
@@ -46,12 +48,14 @@
 									Tambah
 								</a>
 							</td>
-
+							<td class="align-top">
+								<a href="javascript:void(0)" onclick="removePoint('<?= $r ?>')" class="btn btn-danger btn-sm">Hapus Inputan</a>
+							</td>
 						</tr>
 					</tbody>
 					<tfoot>
 						<tr>
-							<td class="align-top" colspan="3">
+							<td class="align-top" colspan="4">
 								<a href="javascript:void(0)" onclick="addPoint()" class="btn btn-sm btn-primary">
 									<i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;
 									Tambah Inputan
@@ -65,17 +69,11 @@
 				<input type="submit" value="Simpan Data" class="btn btn-sm btn-success">
 			</div>
 		</form>
-		<a href="#" onclick="getInput()" class="btn btn-sm btn-primary">Get Input</a>
 	</div>
 </div>
 <script>
-
 	function getInput() {
 		var formElements = new Array();
-		// $("#point-0 :input").each(function(){
-		// 	formElements.push($(this).val())
-		// });
-		// console.log(formElements);
 
 		var formElement = new Array();
 		$("#table-point tbody tr").each(function(i) {
@@ -116,10 +114,17 @@
 		var unindexed_array = getInput();
 		var urlParam = "<?= site_url('penilaian/action-add') ?>";
 		$.post(urlParam, JSON.stringify(unindexed_array), function(res) {
-				console.log(res);
+				if (res.code == 200) {
+					alert(res.message);
+					$("#table-point tbody").html("");
+					addPoint();
+				} else {
+					alert(res.message);
+				}
 			}, 'json')
 			.fail(function(j, e, t) {
-
+				alert(t);
+				console.error(JSON.stringify(j));
 			});
 	})
 
@@ -142,9 +147,14 @@
 		$("#subpoint--" + id).remove();
 	}
 
+	function removePoint(id) {
+		$("#" + id).remove();
+	}
+
 	function addPoint() {
 		ind++;
-		var appd = `<tr id="${Math.floor((Math.random()*1000000000)+1)}" data-index="${ind}">
+		var id = Math.floor((Math.random() * 1000000000) + 1);
+		var appd = `<tr id="${id}" data-index="${ind}">
 							<td class="align-top">
 								<textarea name="isi_point" class="form-control" id="point__${ind}" placeholder="tulis point utama penilaian" required></textarea>
 							</td>
@@ -157,26 +167,10 @@
 									Tambah
 								</a>	
 							</td>
+							<td class="align-top">
+								<a href="javascript:void(0)" onclick="removePoint('${id}')" class="btn btn-danger btn-sm">Hapus Inputan</a>
+							</td>
 						</tr>`;
 		$("#table-point tbody").append(appd);
 	}
-
-	(function($, undefined) {
-		'$:nomunge'; // Used by YUI compressor.
-
-		$.fn.serializeObject = function() {
-			var obj = {};
-
-			$.each(this.serializeArray(), function(i, o) {
-				var n = o.name,
-					v = o.value;
-
-				obj[n] = obj[n] === undefined ? v :
-					$.isArray(obj[n]) ? obj[n].concat(v) : [obj[n], v];
-			});
-
-			return obj;
-		};
-
-	})(jQuery);
 </script>

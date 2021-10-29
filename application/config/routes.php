@@ -62,6 +62,7 @@ $route['api/user/jabatan'] = "api/Api_user/getJabatan";
 $route['api/penilaian/param'] = "api/Api_params/getParams";
 $route['api/penilaian/received'] = "api/Api_params/receivedPenilaian";
 $route['api/penilaian/get-penilaian'] = "api/Api_params/getPenilaian";
+$route['api/pengumuman/list'] = "api/Api_pengumuman/getAllPengumuman";
 
 //bidang
 $route['bidang/form-add'] = "Bidang/formAdd";
@@ -69,8 +70,18 @@ $route['bidang/data-bidang-api'] = "Bidang/dataBidang";
 $route['bidang/get-detail'] = "Bidang/getDetailById";
 $route['bidang/action-add'] = "Bidang/insertData";
 $route['bidang/action-delete'] = "Bidang/deleteData";
+$route['bidang/action-update'] = "Bidang/updateData";
 
 
 //penilaian
 $route['penilaian/add-parameter'] = "Penilaian/formAddParam";
+$route['penilaian/list'] = "Penilaian/daftarParams";
 $route['penilaian/action-add'] = "Penilaian/insertData";
+
+//pengumuman
+$route['pengumuman/add-pengumuman'] = "Pengumuman/formAdd";
+$route['pengumuman/form-edit'] = "Pengumuman/formEditData";
+$route['pengumuman/action-add'] = "Pengumuman/insertData";
+$route['pengumuman/action-update'] = "Pengumuman/updateData";
+$route['pengumuman/list'] = "Pengumuman/daftarPengumuman";
+$route['pengumuman/action-delete'] = "Pengumuman/deleteData";

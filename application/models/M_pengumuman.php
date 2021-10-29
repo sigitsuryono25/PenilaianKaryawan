@@ -1,12 +1,11 @@
 <?php
 
-class M_user extends CI_Model
+class M_pengumuman extends CI_Model
 {
-	public function getAllUser($field = "*", $where = null, $order = null, $group = null, $limit = null, $showCompiled = false)
+	public function getAllPengumuman($field = "*", $where = null, $order = null, $group = null, $limit = null, $showCompiled = false)
 	{
 		$this->db->select($field)
-			->from("tb_user")
-			->join('tb_jabatan', 'tb_user.jabatan=tb_jabatan.id_jabatan');
+			->from("tb_pengumuman");
 
 		if (!empty($where)) {
 			$this->db->where($where);

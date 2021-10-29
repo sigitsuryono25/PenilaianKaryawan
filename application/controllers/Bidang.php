@@ -36,6 +36,20 @@ class Bidang extends Basecontroller
 			$this->internalError();
 		}
 	}
+	public function updateData()
+	{
+		$json = file_get_contents("php://input");
+		$data = json_decode($json, true);
+		$where = ['id_bidang' => $data['id']];
+		unset($data['id']);
+
+		$ins = $this->crud->updateData('tb_bidang', $data, $where);
+		if($ins > 0){
+			$this->success();
+		}else{
+			$this->internalError();
+		}
+	}
 
 	public function getDetailById()
 	{

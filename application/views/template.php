@@ -22,6 +22,25 @@
 	<script src="<?= base_url() ?>/assets/libs/popper.js/dist/umd/popper.min.js"></script>
 	<script src="<?= base_url() ?>/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="<?= base_url() ?>/assets/extra-libs/DataTables/datatables.min.js"></script>
+
+	<!-- DROP ZONE -->
+	<link rel="stylesheet" href="https://cdn.rawgit.com/enyo/dropzone/master/dist/dropzone.css">
+	<script src="https://cdn.rawgit.com/enyo/dropzone/master/dist/dropzone.js"></script>
+
+	<style>
+		.dropzone {
+			border: 0px dashed #dedede;
+			border-radius: 5px;
+			padding: 0;
+			background: #fff;
+		}
+
+		.dropzone .dz-message {
+			margin-top: .2em;
+			border: 2px dashed #dedede;
+			color: rgba(0, 0, 0, .54);
+		}
+	</style>
 </head>
 
 <body>
@@ -75,19 +94,18 @@
 					<ul id="sidebarnav" class="p-t-30">
 						<li class="sidebar-item">
 							<a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
-								<i class="mdi mdi-receipt"></i><span class="hide-menu">Buku </span>
+								<i class="mdi mdi-receipt"></i><span class="hide-menu">Master Data </span>
 							</a>
 							<ul aria-expanded="false" class="collapse">
-								<li class="sidebar-item"><a href="<?= site_url('buku') ?>" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> Daftar Buku </span></a></li>
-								<li class="sidebar-item"><a href="<?= site_url('buku/buat') ?>" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Tambah Buku </span></a></li>
+								<li class="sidebar-item"><a href="<?= site_url('buku') ?>" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> User</span></a></li>
+								<li class="sidebar-item"><a href="<?= site_url('buku') ?>" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> Parameter Penilaian </span></a></li>
 							</ul>
 						</li>
 						<li class="sidebar-item">
 							<a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
-								<i class="mdi mdi-receipt"></i><span class="hide-menu">Kategori </span>
+								<i class="mdi mdi-receipt"></i><span class="hide-menu">Pengumuman </span>
 							</a>
 							<ul aria-expanded="false" class="collapse">
-								<li class="sidebar-item"><a href="<?= site_url('kategori') ?>" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> Daftar Kategori </span></a></li>
 								<li class="sidebar-item"><a href="<?= site_url('kategori/buat') ?>" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Tambah Kategori </span></a></li>
 							</ul>
 						</li>
@@ -132,7 +150,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary" data-dismiss="modal">Batal</button>
-					<a type="button" class="btn btn-danger text-white" href="<?= site_url('auth/logout') ?>">Logout</a>
+					<a type="button" class="btn btn-danger text-white" href="<?= site_url('welcome/logout') ?>">Logout</a>
 				</div>
 			</div>
 		</div>

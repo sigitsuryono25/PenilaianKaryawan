@@ -12,7 +12,7 @@ import com.surelabsid.lti.penilaiankaryawan.main.monitoring.MonitoringActivity
 import com.surelabsid.lti.penilaiankaryawan.main.pengumuman.PengumumanViewModel
 import com.surelabsid.lti.penilaiankaryawan.main.pengumuman.adapter.AdapterPengumuman
 import com.surelabsid.lti.penilaiankaryawan.main.pkp.PkpActivity
-import com.surelabsid.lti.penilaiankaryawan.response.ResponsePengumumanDummy
+import com.surelabsid.lti.penilaiankaryawan.response.ResponsePengumuman
 import es.dmoral.toasty.Toasty
 
 
@@ -72,8 +72,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         Toasty.error(requireActivity(), throwable.message.toString()).show()
     }
 
-    private fun setToView(pengumumanDummy: ResponsePengumumanDummy) {
-        pengumumanDummy.data?.take(5)?.let { adapterPengumuman.addItem(it) }
+    private fun setToView(pengumumanDummy: ResponsePengumuman) {
+        pengumumanDummy.dataPengumuman?.take(5)?.let { adapterPengumuman.addItem(it) }
     }
 
 }

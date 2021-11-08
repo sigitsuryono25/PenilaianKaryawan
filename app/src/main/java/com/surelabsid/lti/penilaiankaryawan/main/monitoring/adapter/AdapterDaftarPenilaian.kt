@@ -3,8 +3,10 @@ package com.surelabsid.lti.penilaiankaryawan.main.monitoring.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.pixplicity.easyprefs.library.Prefs
 import com.surelabsid.lti.penilaiankaryawan.databinding.ItemAdapterDaftarPenilaianBinding
 import com.surelabsid.lti.penilaiankaryawan.response.DataPenilaianItem
+import com.surelabsid.lti.penilaiankaryawan.utils.Constant
 
 class AdapterDaftarPenilaian(private val onClick: (DataPenilaianItem?) -> Unit) :
     RecyclerView.Adapter<AdapterDaftarPenilaian.ViewHolder>() {
@@ -15,15 +17,29 @@ class AdapterDaftarPenilaian(private val onClick: (DataPenilaianItem?) -> Unit) 
         RecyclerView.ViewHolder(mItemAdapterDaftarPenilaianBinding.root) {
 
         fun onBindItem(responsePenilaianItem: DataPenilaianItem?) {
-            var total= 0.0
+            var total = 0.0
             val penilaianItem = responsePenilaianItem?.dataPenilaian
             penilaianItem?.forEach {
                 total = total.plus(it?.nilaiAKhirPerPoint?.toDouble()!!)
             }
 
-            mItemAdapterDaftarPenilaianBinding.nilaiAkhir.text = String.format("Nilai akhir: %.2f", total)
-            mItemAdapterDaftarPenilaianBinding.namaKaryawan.text = responsePenilaianItem?.namaKar?.trim()
-            mItemAdapterDaftarPenilaianBinding.dinilaiPada.text = responsePenilaianItem?.dinilaiPada?.trim()
+            if (Prefs.getString(Constant.JABATAN).equals("7")) {
+                mItemAdapterDaftarPenilaianBinding.nilaiAkhir.text =
+                    String.format("Nilai akhir: %.2f", total)
+                mItemAdapterDaftarPenilaianBinding.namaKaryawan.text =
+                    "Dinilai oleh: " + responsePenilaianItem?.namaPenilai?.trim()
+                mItemAdapterDaftarPenilaianBinding.dinilaiPada.text =
+                    responsePenilaianItem?.dinilaiPada?.trim()
+            } else {
+                mItemAdapterDaftarPenilaianBinding.nilaiAkhir.text =
+                    String.format("Nilai akhir: %.2f", total)
+                mItemAdapterDaftarPenilaianBinding.namaKaryawan.text =
+                    responsePenilaianItem?.namaKar?.trim()
+                mItemAdapterDaftarPenilaianBinding.dinilaiPada.text =
+                    responsePenilaianItem?.dinilaiPada?.trim()
+            }
+
+
 
             mItemAdapterDaftarPenilaianBinding.root.setOnClickListener {
                 onClick(responsePenilaianItem)

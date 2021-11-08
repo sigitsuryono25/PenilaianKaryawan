@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.view.GravityCompat
@@ -35,6 +36,7 @@ class PenilaianKaryawan : Fragment(R.layout.fragment_penilaian_karyawan) {
     private var initIndex = 0
     private var bobotList = mutableListOf<String?>()
     private var idPoint = mutableListOf<String?>()
+    private var givenScore = mutableListOf<String?>()
     private var bobotBidang: String? = null
     private var idBidang: String? = null
     private var namaBidang: String? = null
@@ -90,6 +92,7 @@ class PenilaianKaryawan : Fragment(R.layout.fragment_penilaian_karyawan) {
             val tampunganNilaiSementara = mutableListOf<Nilai>()
             val penilaianLayout = binding.containerPenilaian
             val nilaiPerbidang = mutableListOf<Double>()
+            val givenScore = mutableListOf<Double>()
             val edtPenilaian = mutableListOf<EditText>()
             val pairNilaiXIdPoint = hashMapOf<String?, Double>()
             for (i in 0 until penilaianLayout.childCount) {
@@ -98,11 +101,17 @@ class PenilaianKaryawan : Fragment(R.layout.fragment_penilaian_karyawan) {
                 }
             }
             var jumlah = 0.0
+
             edtPenilaian.forEachIndexed { i, it ->
+                if(it.text.isEmpty()){
+                    Toasty.warning(requireActivity(), "isi semua kolom nilai terlebih dahulu").show()
+                    return
+                }
                 val nilai = it.text.toString().toDouble()
                 val b = bobotList[i].toString().toDouble()
                 val akhir = nilai.times(b)
                 nilaiPerbidang.add(akhir)
+                givenScore.add(it.text.toString().toDouble())
                 jumlah += akhir
             }
 
@@ -111,6 +120,7 @@ class PenilaianKaryawan : Fragment(R.layout.fragment_penilaian_karyawan) {
                 val nilai = Nilai()
                 nilai.idPoint = d
                 nilai.nilai = nilaiPerbidang[i]
+                nilai.giveScore = givenScore[i]
 
                 tampunganNilaiSementara.add(nilai)
             }
@@ -134,6 +144,7 @@ class PenilaianKaryawan : Fragment(R.layout.fragment_penilaian_karyawan) {
             val penilaianLayout = binding.containerPenilaian
             val nilaiPerbidang = mutableListOf<Double>()
             val edtPenilaian = mutableListOf<EditText>()
+            val givenScore = mutableListOf<Double>()
             val pairNilaiXIdPoint = hashMapOf<String?, Double>()
             for (i in 0 until penilaianLayout.childCount) {
                 if (penilaianLayout.getChildAt(i) is EditText) {
@@ -142,10 +153,15 @@ class PenilaianKaryawan : Fragment(R.layout.fragment_penilaian_karyawan) {
             }
             var jumlah = 0.0
             edtPenilaian.forEachIndexed { i, it ->
+                if(it.text.isEmpty()){
+                    Toasty.warning(requireActivity(), "isi semua kolom nilai terlebih dahulu").show()
+                    return
+                }
                 val nilai = it.text.toString().toDouble()
                 val b = bobotList[i].toString().toDouble()
                 val akhir = nilai.times(b)
                 nilaiPerbidang.add(akhir)
+                givenScore.add(it.text.toString().toDouble())
                 jumlah += akhir
             }
 
@@ -154,6 +170,7 @@ class PenilaianKaryawan : Fragment(R.layout.fragment_penilaian_karyawan) {
                 val nilai = Nilai()
                 nilai.idPoint = d
                 nilai.nilai = nilaiPerbidang[i]
+                nilai.giveScore = givenScore[i]
 
                 tampunganNilaiSementara.add(nilai)
             }

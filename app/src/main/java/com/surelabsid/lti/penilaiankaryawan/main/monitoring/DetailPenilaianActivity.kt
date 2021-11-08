@@ -11,12 +11,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProvider
+import com.pixplicity.easyprefs.library.Prefs
 import com.surelabsid.lti.penilaiankaryawan.R
 import com.surelabsid.lti.penilaiankaryawan.databinding.ActivityDetailPenilaianBinding
 import com.surelabsid.lti.penilaiankaryawan.main.pkp.PkpViewModel
 import com.surelabsid.lti.penilaiankaryawan.response.DataParamItem
 import com.surelabsid.lti.penilaiankaryawan.response.DataPenilaianItem
 import com.surelabsid.lti.penilaiankaryawan.response.ResponseParams
+import com.surelabsid.lti.penilaiankaryawan.utils.Constant
 import es.dmoral.toasty.Toasty
 
 class DetailPenilaianActivity : AppCompatActivity() {
@@ -36,7 +38,11 @@ class DetailPenilaianActivity : AppCompatActivity() {
         val incomingData = intent.getParcelableExtra<DataPenilaianItem>("data_penilaian")
 
         supportActionBar?.apply {
-            title = "Detail Penilaian Karyawan"
+            if (Prefs.getString(Constant.JABATAN).equals("7")) {
+                title = "Detail Hasil Penilaian Anda"
+            }else {
+                title = "Detail Penilaian Karyawan"
+            }
             setDisplayHomeAsUpEnabled(true)
             subtitle = incomingData?.namaKar?.trim()
         }

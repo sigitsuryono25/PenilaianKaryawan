@@ -33,6 +33,8 @@ interface ApiService {
     @GET("api/penilaian/get-penilaian")
     suspend fun getPenilaian(@Query("dinilai_oleh") dinilaiOleh: String?): ResponsePenilaian
 
+    @GET("api/penilaian/get-penilaian-by-user")
+    suspend fun getPenilaianByUser(@Query("id_karyawan") idKaryawan: String?): ResponsePenilaian
 
     @GET("api/pengumuman/list")
     suspend fun getPengumuman(): ResponsePengumuman

@@ -6,7 +6,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object NetworkModule {
-    const val BASE_URL = "http://192.168.18.114/codeigniter/PenilaianKaryawanBMT/index.php/"
+//    const val BASE_URL = "http://192.168.18.114/codeigniter/PenilaianKaryawanBMT/"
+    const val BASE_URL = "http://bmt-bima.server4111.com/"
     const val BASE_URL_LTI = "https://lauwba.com/webservices/"
 
 
@@ -22,7 +23,7 @@ object NetworkModule {
 
     private fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(BASE_URL + "index.php/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(getOkHttp())
             .build()

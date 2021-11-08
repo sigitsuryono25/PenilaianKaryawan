@@ -1,13 +1,16 @@
 package com.surelabsid.lti.penilaiankaryawan
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.pixplicity.easyprefs.library.Prefs
 import com.surelabsid.lti.penilaiankaryawan.databinding.ActivityMainBinding
 import com.surelabsid.lti.penilaiankaryawan.main.akun.AkunFragment
 import com.surelabsid.lti.penilaiankaryawan.main.home.HomeFragment
 import com.surelabsid.lti.penilaiankaryawan.main.pkp.PkpActivity
+import com.surelabsid.lti.penilaiankaryawan.utils.Constant
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -15,10 +18,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        supportActionBar?.apply {
-            title = "Penilaian Kinerja Pegawai"
-        }
 
         this.changeFragment(HomeFragment())
 
@@ -29,7 +28,7 @@ class MainActivity : AppCompatActivity() {
                     return@setOnItemSelectedListener true
                 }
                 R.id.akun -> {
-                    this.changeFragment(AkunFragment())
+                    this.changeFragment(AkunFragment(), "Akun Anda")
                     return@setOnItemSelectedListener true
                 }
             }
@@ -37,14 +36,20 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.pkp.setOnClickListener {
+            if (Prefs.getString(Constant.JABATAN).equals("7")) {
+                HomeFragment.setAlert("Menu tidak tersedia dilevel anda", this)
+                return@setOnClickListener
+            }
             Intent(this@MainActivity, PkpActivity::class.java).apply {
                 startActivity(this)
             }
         }
     }
 
-    private fun changeFragment(fragment: Fragment) {
+    private fun changeFragment(fragment: Fragment, title: String = "Penilaian Kinerja Pegawai") {
         supportFragmentManager.beginTransaction().replace(R.id.container, fragment).commit()
+        supportActionBar?.title = title
 
     }
+
 }

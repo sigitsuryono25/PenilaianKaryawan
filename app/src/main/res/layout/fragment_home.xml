@@ -10,10 +10,10 @@
 
     <ImageView
         android:id="@+id/cover"
-        android:layout_marginTop="-25dp"
         android:layout_width="match_parent"
         android:layout_height="170dp"
         android:layout_alignParentTop="true"
+        android:layout_marginTop="-25dp"
         android:contentDescription="@string/app_name"
         android:src="@drawable/banner" />
 
@@ -62,7 +62,7 @@
                                 android:layout_height="wrap_content"
                                 android:contentDescription="@string/app_name"
                                 android:src="@drawable/ic_monitoring"
-                                app:tint="@color/blue_700" />
+                                app:tint="@color/blue_500" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -86,7 +86,7 @@
                                 android:layout_height="wrap_content"
                                 android:contentDescription="@string/app_name"
                                 android:src="@drawable/ic_checklist"
-                                app:tint="@color/blue_700" />
+                                app:tint="@color/blue_500" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -111,7 +111,7 @@
                                 android:layout_height="wrap_content"
                                 android:contentDescription="@string/app_name"
                                 android:src="@drawable/ic_monitoring"
-                                app:tint="@color/blue_700" />
+                                app:tint="@color/blue_500" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -132,14 +132,33 @@
                     android:layout_marginTop="8dp"
                     android:padding="8dp">
 
+                    <ImageView
+                        android:id="@+id/bg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/bg_title"
+                        app:tint="@color/blue_500" />
+
+                    <View
+                        android:background="@color/orange_700"
+                        android:layout_width="match_parent"
+                        android:layout_marginEnd="30dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_alignBottom="@id/bg"
+                        android:layout_height="4dp"/>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
+                        android:layout_marginStart="30dp"
                         android:text="@string/pengumuman"
+                        android:textColor="@color/white"
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/selengkapnya"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
@@ -168,8 +187,8 @@
             </com.facebook.shimmer.ShimmerFrameLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
                 android:id="@+id/rvPengumuman"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@id/menu"
                 android:layout_marginTop="8dp"

@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class ResponsePengumuman(
+data class ResponseDetailPengumuman(
 
 	@field:SerializedName("code")
 	val code: Int? = null,
@@ -14,24 +14,27 @@ data class ResponsePengumuman(
 	val message: String? = null,
 
 	@field:SerializedName("data_pengumuman")
-	val dataPengumuman: List<DataPengumumanItem?>? = null
+	val dataPengumuman: DataPengumuman? = null
 ) : Parcelable
 
 @Parcelize
-data class DataPengumumanItem(
+data class DataPengumuman(
 
 	@field:SerializedName("keterangan")
 	val keterangan: String? = null,
 
-	@field:SerializedName("cover")
-	val cover: String? = null,
-
-	@field:SerializedName("added_on")
-	val addedOn: String? = null,
-
 	@field:SerializedName("file")
 	val file: List<String?>? = null,
 
+	@field:SerializedName("added_by")
+	val addedBy: String? = null,
+
+	@field:SerializedName("id")
+	val id: String? = null,
+
 	@field:SerializedName("judul")
-	val judul: String? = null
+	val judul: String? = null,
+
+	@field:SerializedName("added_on")
+	val addedOn: String? = null
 ) : Parcelable

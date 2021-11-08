@@ -23,8 +23,8 @@ class AkunFragment : Fragment(R.layout.fragment_akun) {
 
         binding = FragmentAkunBinding.bind(view)
 
-        binding.nama.text = Prefs.getString(Constant.NAMA)
-        binding.userid.text = Prefs.getString(Constant.USERID)
+        binding.nama.text = Prefs.getString(Constant.NAMA).trim()
+        binding.userid.text = Prefs.getString(Constant.USERID).trim()
 
 
         binding.logout.setOnClickListener {
@@ -33,7 +33,7 @@ class AkunFragment : Fragment(R.layout.fragment_akun) {
                 .setMessage("Semua sesi akan diakhiri dan anda harus login kembali.\nLanjutkan?")
                 .setPositiveButton(
                     "Ok"
-                ) { p0, p1 ->
+                ) { _, _ ->
                     Prefs.clear()
                     ActivityCompat.finishAffinity(requireActivity())
                     Intent(requireActivity(), LoginActivity::class.java).apply {

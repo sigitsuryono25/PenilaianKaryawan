@@ -25,4 +25,16 @@ class PenilaianViewModel: BaseViewModel() {
             }
         }
     }
+
+    fun getPenilaianByUser(idKaryawan: String?){
+        viewModelScope.launch {
+            try {
+                val data = apiService.getPenilaianByUser(idKaryawan)
+                _data.postValue(data)
+            }catch(e: Throwable){
+                _error.postValue(e)
+                e.printStackTrace()
+            }
+        }
+    }
 }

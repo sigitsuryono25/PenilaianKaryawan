@@ -10,7 +10,8 @@ data class Penilaian (
 
 data class Nilai(
     var idPoint: String? = null,
-    var nilai: Double? = null
+    var nilai: Double? = null,
+    var giveScore: Double? = null
 )
 
 

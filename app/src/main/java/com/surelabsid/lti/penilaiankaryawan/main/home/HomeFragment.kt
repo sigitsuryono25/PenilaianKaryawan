@@ -1,18 +1,24 @@
 package com.surelabsid.lti.penilaiankaryawan.main.home
 
+import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.pixplicity.easyprefs.library.Prefs
 import com.surelabsid.lti.penilaiankaryawan.R
 import com.surelabsid.lti.penilaiankaryawan.databinding.FragmentHomeBinding
-import com.surelabsid.lti.penilaiankaryawan.main.monitoring.MonitoringActivity
+import com.surelabsid.lti.penilaiankaryawan.main.monitoring.PenilaianActivity
+import com.surelabsid.lti.penilaiankaryawan.main.pengumuman.AllPengumumanActivity
+import com.surelabsid.lti.penilaiankaryawan.main.pengumuman.DetailPengumumanActivity
 import com.surelabsid.lti.penilaiankaryawan.main.pengumuman.PengumumanViewModel
 import com.surelabsid.lti.penilaiankaryawan.main.pengumuman.adapter.AdapterPengumuman
 import com.surelabsid.lti.penilaiankaryawan.main.pkp.PkpActivity
 import com.surelabsid.lti.penilaiankaryawan.response.ResponsePengumuman
+import com.surelabsid.lti.penilaiankaryawan.utils.Constant
 import es.dmoral.toasty.Toasty
 
 
@@ -47,22 +53,37 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
         }
 
-        adapterPengumuman = AdapterPengumuman()
+        adapterPengumuman = AdapterPengumuman {
+            Intent(requireActivity(), DetailPengumumanActivity::class.java).apply {
+                putExtra("dataPengumuman", it)
+                startActivity(this)
+            }
+        }
         binding.rvPengumuman.apply {
             adapter = adapterPengumuman
             layoutManager = LinearLayoutManager(requireActivity())
         }
 
+        binding.selengkapnya.setOnClickListener {
+            Intent(requireActivity(), AllPengumumanActivity::class.java).apply {
+                startActivity(this)
+            }
+        }
+
         binding.shimmerPengumuman.startShimmer()
 
         binding.pkp.setOnClickListener {
+            if (Prefs.getString(Constant.JABATAN).equals("7")) {
+                setAlert("Menu tidak tersedia dilevel anda", requireActivity())
+                return@setOnClickListener
+            }
             Intent(requireActivity(), PkpActivity::class.java).apply {
                 startActivity(this)
             }
         }
 
         binding.monitoring.setOnClickListener {
-            Intent(requireActivity(), MonitoringActivity::class.java).apply {
+            Intent(requireActivity(), PenilaianActivity::class.java).apply {
                 startActivity(this)
             }
         }
@@ -74,6 +95,17 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun setToView(pengumumanDummy: ResponsePengumuman) {
         pengumumanDummy.dataPengumuman?.take(5)?.let { adapterPengumuman.addItem(it) }
+    }
+
+    companion object {
+        fun setAlert(message: String, context: Context) {
+            AlertDialog.Builder(context)
+                .setMessage(message)
+                .setTitle("Akses Ditolak")
+                .setPositiveButton("ok") { _, _ ->
+                }
+                .create().show()
+        }
     }
 
 }

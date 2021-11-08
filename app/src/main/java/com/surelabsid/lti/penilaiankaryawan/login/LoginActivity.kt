@@ -55,6 +55,9 @@ class LoginActivity : AppCompatActivity() {
     private fun setSuccess(user: ResponseUser) {
         Prefs.putString(Constant.USERID, user.dataUser?.userid)
         Prefs.putString(Constant.NAMA, user.dataUser?.nama)
+        Prefs.putString(Constant.JABATAN, user.dataUser?.idJabatan)
+        Prefs.putString(Constant.NAMA_JABATAN, user.dataUser?.namaJabatan)
+        Prefs.putString(Constant.TERDAFTAR_PADA, user.dataUser?.createdAt)
 
         Intent(this, MainActivity::class.java).apply {
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)

@@ -1,18 +1,19 @@
+<?php
+$idJabatan = (!empty($this->input->get('idjabatan'))) ? $this->input->get('idjabatan') : 1;
+?>
 <div class="card">
 	<div class="card-header">
 		<h4 class="card-title">Daftar Params</h4>
 	</div>
 	<div class="card-body">
-		<form id="daftarParamsForm">
-			<div class="form-group">
-				<label>Untuk Jabatan</label>
-				<select name="id_jabatan" class="form-control" required>
-					<?php foreach ($jabatan as $j) { ?>
-						<option value="<?= $j->id_jabatan ?>"><?= $j->nama_jabatan ?></option>
-					<?php } ?>
-				</select>
-			</div>
-		</form>
+		<div class="form-group">
+			<label>Untuk Jabatan</label>
+			<select name="id_jabatan" class="form-control" required>
+				<?php foreach ($jabatan as $j) { ?>
+					<option value="<?= $j->id_jabatan ?>" <?= ($j->id_jabatan == $idJabatan) ? "selected" : "" ?>><?= $j->nama_jabatan ?></option>
+				<?php } ?>
+			</select>
+		</div>
 		<div class="table-responsive">
 			<table class="table table-sm table-bordered">
 				<thead>
@@ -32,7 +33,7 @@
 					$no = 1;
 					foreach ($bidang as $key => $bd) {
 						$startCode = 97;
-						$point = $this->db->query("SELECT * FROM tb_point WHERE id_bidang IN ('$bd->id_bidang') AND id_jabatan IN ('2') ORDER BY urutan ASC");
+						$point = $this->db->query("SELECT * FROM tb_point WHERE id_bidang IN ('$bd->id_bidang') AND id_jabatan IN ('$id_jabatan') ORDER BY urutan ASC");
 					?>
 						<tr>
 							<td rowspan="<?= $point->num_rows() + 1 ?>"><?= $no ?></td>
@@ -50,7 +51,7 @@
 										<?php } ?>
 									</ul>
 								</td>
-								<td><?= $p->bobot ?></td>
+								<td><?= ($p->bobot * 100) ?>%</td>
 								<?php if ($kk == 0) { ?>
 									<td rowspan="<?= $point->num_rows() + 1 ?>">
 										<a href="javascript:void(0)" class="btn btn-block btn-warning btn-sm">
@@ -72,5 +73,9 @@
 			</table>
 		</div>
 	</div>
-
 </div>
+<script>
+	$('[name="id_jabatan"]').change(function() {
+		location.assign('<?= site_url('penilaian/list?idjabatan=') ?>' + $(this).val());
+	});
+</script>

@@ -8,15 +8,19 @@
  * 
  * jangan extends controller untuk login ke class ini. 
  * nanti akan terjadi never ending looping (Too Many Redirect).
-*/
+ */
 
-class Basecontroller extends CI_Controller{
-	
+class Basecontroller extends CI_Controller
+{
+
 	function __construct()
 	{
 		parent::__construct();
 
 		//check if user logged in or not
+		if (!$this->session->has_userdata('username')) {
+			redirect(site_url());
+		}
 	}
 
 	public function getDate($format = "Y-m-d H:i:s")
@@ -74,6 +78,34 @@ class Basecontroller extends CI_Controller{
 			'message' => $message,
 			"code" => 200
 		]);
+	}
+
+	public function base64ToFile($stringBase64, $path)
+	{
+		if (!is_dir($path)) {
+			mkdir($path, 0775, TRUE);
+		}
+
+		$image = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $stringBase64));
+		$name = md5(time()) . ".jpg";
+		if (file_put_contents($path . $name, $image) !== FALSE) {
+			return $name;
+		}
+	}
+
+	public function pushNotification($message)
+	{
+		$url = "https://firebasepush.server4111.com/push.php";
+		$ch = curl_init($url);
+		$payload = json_encode($message);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type:application/json"));
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+		$result = curl_exec($ch);
+		curl_close($ch);
+
+		return $result;
 	}
 
 

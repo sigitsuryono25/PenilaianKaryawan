@@ -21,12 +21,15 @@ class Penilaian extends Basecontroller
 
 	public function daftarParams()
 	{
+		$idJabatan = $this->input->get('idjabatan');
+		$data['id_jabatan'] = (!empty($idJabatan)) ? $idJabatan : 1;
 		$data['jabatan'] = $this->jabatan->getAllJabatan()->result();
 		$data['bidang'] = $this->bidang->getAllBidang()->result();
 		$master['page'] = $this->load->view('penilaian/daftar-params', $data, TRUE);
 		$master['title'] = "Daftar Parameter Penilaian";
-		$this->load->view('template', $master);		
+		$this->load->view('template', $master);
 	}
+
 
 	function insertData()
 	{
@@ -63,5 +66,33 @@ class Penilaian extends Basecontroller
 		if ($ins && $insSub) {
 			$this->success();
 		}
+	}
+
+	public function hasilPenilaian()
+	{
+		$karyawan = $this->input->get('karyawan');
+		$idJabatan = $this->input->get('id_jabatan');
+		$bulan = $this->input->get('bulan');
+		$tahun = $this->input->get('tahun');
+		if (empty($karyawan)) {
+			$data['bidang'] = [];
+			$data['id_jabatan'] = '';
+			$data['daftar_kar'] = '';
+			$data['bulan'] = '';
+			$data['tahun'] = '';
+		} else {
+			$data['bidang'] = $this->bidang->getAllBidang()->result();
+			$data['karyawan'] = $karyawan;
+			$data['id_jabatan'] = $idJabatan;
+			$data['daftar_kar'] = $this->user->getAllUser("nama, userid, jabatan", ['jabatan' => $idJabatan])->result();
+			$data['periode'] = $this->etc->indonesiaDate($tahun . "-" . $bulan . "-01", null, "", false, true);
+			$data['bulan'] = $bulan;
+			$data['tahun'] = $tahun;
+		}
+
+		$data['jabatan'] = $this->jabatan->getAllJabatan()->result();
+		$master['page'] = $this->load->view('penilaian/result', $data, TRUE);
+		$master['title'] = "Hasil Penilaian";
+		$this->load->view('template', $master);
 	}
 }

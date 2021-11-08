@@ -62,7 +62,9 @@ $route['api/user/jabatan'] = "api/Api_user/getJabatan";
 $route['api/penilaian/param'] = "api/Api_params/getParams";
 $route['api/penilaian/received'] = "api/Api_params/receivedPenilaian";
 $route['api/penilaian/get-penilaian'] = "api/Api_params/getPenilaian";
+$route['api/penilaian/get-penilaian-by-user'] = "api/Api_params/getPenilaianByUser";
 $route['api/pengumuman/list'] = "api/Api_pengumuman/getAllPengumuman";
+$route['api/pengumuman/detail'] = "api/Api_pengumuman/detailPengumuman";
 
 //bidang
 $route['bidang/form-add'] = "Bidang/formAdd";
@@ -77,6 +79,7 @@ $route['bidang/action-update'] = "Bidang/updateData";
 $route['penilaian/add-parameter'] = "Penilaian/formAddParam";
 $route['penilaian/list'] = "Penilaian/daftarParams";
 $route['penilaian/action-add'] = "Penilaian/insertData";
+$route['penilaian/result'] = "Penilaian/hasilPenilaian";
 
 //pengumuman
 $route['pengumuman/add-pengumuman'] = "Pengumuman/formAdd";
@@ -85,3 +88,13 @@ $route['pengumuman/action-add'] = "Pengumuman/insertData";
 $route['pengumuman/action-update'] = "Pengumuman/updateData";
 $route['pengumuman/list'] = "Pengumuman/daftarPengumuman";
 $route['pengumuman/action-delete'] = "Pengumuman/deleteData";
+
+
+//user
+$route['user/get-by-jabatan'] = "User/getUserByJabatan";
+$route['user/list'] = "User/getAllUser";
+$route['user/add-user'] = "User/formAdd";
+$route['user/action-add'] = "User/insertData";
+$route['user/form-edit'] = "User/formEdit";
+$route['user/action-update'] = "User/editData";
+$route['user/action-delete'] = "User/hapusData";

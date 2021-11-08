@@ -27,6 +27,9 @@
 	<link rel="stylesheet" href="https://cdn.rawgit.com/enyo/dropzone/master/dist/dropzone.css">
 	<script src="https://cdn.rawgit.com/enyo/dropzone/master/dist/dropzone.js"></script>
 
+	<script src="https://cdn.jsdelivr.net/gh/linways/table-to-excel@v1.0.4/dist/tableToExcel.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.4.95/css/materialdesignicons.min.css">
+
 	<style>
 		.dropzone {
 			border: 0px dashed #dedede;
@@ -60,12 +63,9 @@
 
 					<a class="navbar-brand" href="index.html">
 						<!-- Logo icon -->
-						<b class="logo-icon p-l-10">
-							<h4 class="text-white">AP</h4>
-						</b>
 						<span class="logo-text">
 							<!-- dark Logo text -->
-							<h4 class="text-white"> | Admin PAI</h4>
+							<h4 class="text-white">Admin KSPPS BMT BIMA</h4>
 
 						</span>
 					</a>
@@ -79,6 +79,7 @@
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="<?= base_url() ?>/assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31"></a>
 							<div class="dropdown-menu dropdown-menu-right user-dd animated">
+								<a class="dropdown-item" href="javascript:void(0)" ><i class="fa fa-user-circle m-r-5 m-l-5" aria-hidden="true"></i>Signed as: <?= $this->session->userdata('nama')?></a>
 								<a class="dropdown-item" href="#modalLogout" data-toggle="modal" data-target="#modalLogout"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
 							</div>
 						</li>
@@ -94,19 +95,28 @@
 					<ul id="sidebarnav" class="p-t-30">
 						<li class="sidebar-item">
 							<a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
-								<i class="mdi mdi-receipt"></i><span class="hide-menu">Master Data </span>
+								<i class="mdi mdi-database-outline"></i><span class="hide-menu">Master Data </span>
 							</a>
 							<ul aria-expanded="false" class="collapse">
-								<li class="sidebar-item"><a href="<?= site_url('buku') ?>" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> User</span></a></li>
-								<li class="sidebar-item"><a href="<?= site_url('buku') ?>" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> Parameter Penilaian </span></a></li>
+								<li class="sidebar-item"><a href="<?= site_url('user/list')?>" class="sidebar-link"><i class="mdi mdi-account-circle-outline"></i><span class="hide-menu"> User</span></a></li>
+								<li class="sidebar-item"><a href="<?= site_url('bidang/form-add') ?>" class="sidebar-link"><i class="mdi mdi-magnify"></i><span class="hide-menu"> Bidang Penilaian </span></a></li>
+								<li class="sidebar-item"><a href="<?= site_url('penilaian/list') ?>" class="sidebar-link"><i class="mdi mdi-format-list-bulleted"></i><span class="hide-menu"> Parameter Penilaian </span></a></li>
 							</ul>
 						</li>
 						<li class="sidebar-item">
 							<a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
-								<i class="mdi mdi-receipt"></i><span class="hide-menu">Pengumuman </span>
+								<i class="mdi mdi-order-bool-descending"></i><span class="hide-menu">Penilaian </span>
 							</a>
 							<ul aria-expanded="false" class="collapse">
-								<li class="sidebar-item"><a href="<?= site_url('kategori/buat') ?>" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Tambah Kategori </span></a></li>
+								<li class="sidebar-item"><a href="<?= site_url('penilaian/result') ?>" class="sidebar-link"><i class="mdi mdi-calendar-check"></i><span class="hide-menu"> Hasil </span></a></li>
+							</ul>
+						</li>
+						<li class="sidebar-item">
+							<a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+								<i class="mdi mdi-bullhorn-outline"></i><span class="hide-menu">Pengumuman </span>
+							</a>
+							<ul aria-expanded="false" class="collapse">
+								<li class="sidebar-item"><a href="<?= site_url('pengumuman/list') ?>" class="sidebar-link"><i class="mdi mdi-access-point-check"></i><span class="hide-menu"> Daftar Pengumuman </span></a></li>
 							</ul>
 						</li>
 					</ul>
@@ -126,9 +136,6 @@
 			<div class="container-fluid">
 				<?= $page ?>
 			</div>
-			<footer class="footer text-center">
-				Designed and Developed by AP | Admin PAI</a>.
-			</footer>
 		</div>
 	</div>
 

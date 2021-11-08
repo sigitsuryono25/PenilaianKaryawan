@@ -89,4 +89,32 @@ class Api_params extends Baseapi
 			$this->notFound();
 		}
 	}
+
+	public function getPenilaianByUser()
+	{
+		$dinilaiOleh = $this->input->get('id_karyawan');
+		$penilaian = $this->db->query("SELECT user1.userid as id_penilai, user1.nama as nama_penilai, 
+		user2.userid as id_kar, user2.nama as nama_kar, user2.jabatan as jabatan_kar, tb_penilaian.* FROM tb_penilaian
+		INNER JOIN tb_user as user1 ON tb_penilaian.dinilai_oleh=user1.userid
+		INNER JOIN tb_user as user2 ON tb_penilaian.id_karyawan=user2.userid
+		 WHERE id_karyawan IN ('$dinilaiOleh')")->result();
+		$data = [];
+		foreach ($penilaian as $p) {
+			$tmp = [];
+			$tmp['id_penilai'] = $p->id_penilai;
+			$tmp['nama_penilai'] = $p->nama_penilai;
+			$tmp['jabatan_kar'] = $p->jabatan_kar;
+			$tmp['id_kar'] = $p->id_kar;
+			$tmp['nama_kar'] = $p->nama_kar;
+			$tmp['dinilai_pada'] = date_format(date_create($p->dinilai_pada), "d/m/Y");
+			$tmp['data_penilaian'] = json_decode($p->data_penilaian);
+
+			array_push($data, $tmp);
+		}
+		if (!empty($data)) {
+			$this->success("data ditemukan", "data_penilaian", $data);
+		} else {
+			$this->notFound();
+		}
+	}
 }

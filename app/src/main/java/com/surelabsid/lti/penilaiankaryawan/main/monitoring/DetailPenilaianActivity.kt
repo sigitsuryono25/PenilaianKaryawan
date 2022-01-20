@@ -17,6 +17,7 @@ import com.surelabsid.lti.penilaiankaryawan.databinding.ActivityDetailPenilaianB
 import com.surelabsid.lti.penilaiankaryawan.main.pkp.PkpViewModel
 import com.surelabsid.lti.penilaiankaryawan.response.DataParamItem
 import com.surelabsid.lti.penilaiankaryawan.response.DataPenilaianItem
+import com.surelabsid.lti.penilaiankaryawan.response.PenilaianItem
 import com.surelabsid.lti.penilaiankaryawan.response.ResponseParams
 import com.surelabsid.lti.penilaiankaryawan.utils.Constant
 import es.dmoral.toasty.Toasty
@@ -28,7 +29,7 @@ class DetailPenilaianActivity : AppCompatActivity() {
     private var initIndex = 0
     private var dataParam: List<DataParamItem?>? = null
     private var bobotBidang: String? = null
-    private var dataPenilaianItem: List<DataPenilaianItem?>? = null
+    private var dataPenilaianItem: List<PenilaianItem?>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +50,7 @@ class DetailPenilaianActivity : AppCompatActivity() {
 
         vm = ViewModelProvider(this).get(PkpViewModel::class.java)
 
-        dataPenilaianItem = incomingData?.dataPenilaian
+        dataPenilaianItem = incomingData?.penilaian
 
         binding.lanjut.setOnClickListener {
             initIndex++
@@ -126,7 +127,7 @@ class DetailPenilaianActivity : AppCompatActivity() {
                 it?.idBidang == dataParam?.get(initIndex)?.idBidang
             }
 
-            val nilai = filterIdBidang?.get(0)?.pairNilaiXidPoint?.filter {
+            val nilai = filterIdBidang?.get(0)?.nilaiDanPoint?.filter {
                 it?.idPoint == d?.idPoint
             }
 

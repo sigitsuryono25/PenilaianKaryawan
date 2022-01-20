@@ -1,5 +1,6 @@
 package com.surelabsid.lti.penilaiankaryawan.main.monitoring.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -18,9 +19,10 @@ class AdapterDaftarPenilaian(private val onClick: (DataPenilaianItem?) -> Unit) 
 
         fun onBindItem(responsePenilaianItem: DataPenilaianItem?) {
             var total = 0.0
-            val penilaianItem = responsePenilaianItem?.dataPenilaian
+            val penilaianItem = responsePenilaianItem?.penilaian
             penilaianItem?.forEach {
-                total = total.plus(it?.nilaiAKhirPerPoint?.toDouble()!!)
+                total = total.plus(it?.nilaiAkhirPerPoint?.replace(",", ".")?.toDouble()!!)
+//                Log.d("onBindItem", "onBindItem: ${it?.nilaiAkhirPerPoint}")
             }
 
             if (Prefs.getString(Constant.JABATAN).equals("7")) {

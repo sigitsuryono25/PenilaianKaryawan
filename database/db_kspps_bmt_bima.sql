@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 08, 2021 at 08:50 AM
--- Server version: 10.4.20-MariaDB
--- PHP Version: 8.0.8
+-- Host: localhost
+-- Generation Time: Jan 26, 2022 at 05:27 AM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -88,16 +88,6 @@ CREATE TABLE `tb_pengumuman` (
   `added_on` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `tb_pengumuman`
---
-
-INSERT INTO `tb_pengumuman` (`id`, `judul`, `file`, `cover`, `keterangan`, `added_by`, `added_on`) VALUES
-(6, 'Pengumuman Libur Akhir Tahun BMT BIMA', '[\"c169c6f93bd14bea247ac681a1575ad6.pdf\",\"41719958f3535da5422995c26fa39a7c.pdf\",\"260eee00a123472c536169bc78ceac51.pdf\"]', 'e854f6111013908a68ab95b516529f08.jpg', 'Pengumuman Libur Akhir Tahun BMT BIMA', '', '2021-10-29 07:57:38'),
-(18, 'Prosedur Kerja Selama Pandemi', NULL, '', '<p>Prosedur Kerja Selama Pandemi&nbsp;Prosedur Kerja Selama Pandemi&nbsp;<span style=\"font-size: 0.875rem;\">Prosedur Kerja Selama Pandemi&nbsp;Prosedur Kerja Selama Pandemi&nbsp;</span><span style=\"font-size: 0.875rem;\">Prosedur Kerja Selama Pandemi&nbsp;Prosedur Kerja Selama Pandemi&nbsp;</span><span style=\"font-size: 0.875rem;\">Prosedur Kerja Selama Pandemi&nbsp;Prosedur Kerja Selama Pandemi&nbsp;</span><span style=\"font-size: 0.875rem;\">Prosedur Kerja Selama Pandemi&nbsp;Prosedur Kerja Selama Pandemi&nbsp;</span><span style=\"font-size: 0.875rem;\">Prosedur Kerja Selama Pandemi&nbsp;Prosedur Kerja Selama Pandemi&nbsp;</span><span style=\"font-size: 0.875rem;\">Prosedur Kerja Selama Pandemi&nbsp;Prosedur Kerja Selama Pandemi&nbsp;</span><span style=\"font-size: 0.875rem;\">Prosedur Kerja Selama Pandemi&nbsp;Prosedur Kerja Selama Pandemi&nbsp;</span><span style=\"font-size: 0.875rem;\">Prosedur Kerja Selama Pandemi&nbsp;Prosedur Kerja Selama Pandemi&nbsp;</span><span style=\"font-size: 0.875rem;\">Prosedur Kerja Selama Pandemi&nbsp;Prosedur Kerja Selama Pandemi&nbsp;</span><br></p>', '', '2021-11-01 07:00:58'),
-(19, 'Pengumuman Kenaikan Jabatan', NULL, '', '<p>Pengumuman Kenaikan Jabatan&nbsp;Pengumuman Kenaikan Jabatan&nbsp;<span style=\"font-size: 0.875rem;\">Pengumuman Kenaikan Jabatan&nbsp;Pengumuman Kenaikan Jabatan&nbsp;</span><span style=\"font-size: 0.875rem;\">Pengumuman Kenaikan Jabatan&nbsp;Pengumuman Kenaikan Jabatan&nbsp;</span><span style=\"font-size: 0.875rem;\">Pengumuman Kenaikan Jabatan&nbsp;Pengumuman Kenaikan Jabatan&nbsp;</span><span style=\"font-size: 0.875rem;\">Pengumuman Kenaikan Jabatan&nbsp;Pengumuman Kenaikan Jabatan&nbsp;</span><span style=\"font-size: 0.875rem;\">Pengumuman Kenaikan Jabatan&nbsp;Pengumuman Kenaikan Jabatan&nbsp;</span><span style=\"font-size: 0.875rem;\">Pengumuman Kenaikan Jabatan&nbsp;Pengumuman Kenaikan Jabatan&nbsp;</span><span style=\"font-size: 0.875rem;\">Pengumuman Kenaikan Jabatan&nbsp;Pengumuman Kenaikan Jabatan&nbsp;</span><span style=\"font-size: 0.875rem;\">Pengumuman Kenaikan Jabatan&nbsp;Pengumuman Kenaikan Jabatan&nbsp;</span><span style=\"font-size: 0.875rem;\">Pengumuman Kenaikan Jabatan&nbsp;Pengumuman Kenaikan Jabatan&nbsp;</span><br></p>', '', '2021-11-01 07:02:44'),
-(36, 'DIKLAT Staf Pusat Manajemen Proyek PT. PLN (Persero)', '[\"f39f60644877d76392d1a7b64e824929.jpg\"]', '9bc443b75aef8fcfb53c30445c172fa4.jpg', '<p>DIKLAT Staf Pusat Manajemen Proyek PT. PLN (Persero)<br></p>', '', '2021-11-08 03:20:31');
-
 -- --------------------------------------------------------
 
 --
@@ -111,13 +101,6 @@ CREATE TABLE `tb_penilaian` (
   `data_penilaian` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`data_penilaian`)),
   `dinilai_pada` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tb_penilaian`
---
-
-INSERT INTO `tb_penilaian` (`id`, `dinilai_oleh`, `id_karyawan`, `data_penilaian`, `dinilai_pada`) VALUES
-(21, '1634785822462', '1634785822425', '[{\"bobotPoint\":\"0.15\",\"idBidang\":\"1\",\"nilaiAKhirPerPoint\":\"1.05\",\"pairNilaiXidPoint\":[{\"giveScore\":7,\"idPoint\":\"1747915758\",\"nilai\":2.8000000000000003},{\"giveScore\":7,\"idPoint\":\"1747915764\",\"nilai\":1.4000000000000001},{\"giveScore\":7,\"idPoint\":\"1747915765\",\"nilai\":1.4000000000000001},{\"giveScore\":7,\"idPoint\":\"1747915769\",\"nilai\":1.4000000000000001}]},{\"bobotPoint\":\"0.15\",\"idBidang\":\"2\",\"nilaiAKhirPerPoint\":\"1.04\",\"pairNilaiXidPoint\":[{\"giveScore\":6.9,\"idPoint\":\"1747915756\",\"nilai\":2.7600000000000002},{\"giveScore\":7,\"idPoint\":\"1747915762\",\"nilai\":2.1},{\"giveScore\":7,\"idPoint\":\"1747915767\",\"nilai\":2.1}]},{\"bobotPoint\":\"0.10\",\"idBidang\":\"3\",\"nilaiAKhirPerPoint\":\"0.70\",\"pairNilaiXidPoint\":[{\"giveScore\":7,\"idPoint\":\"1747915757\",\"nilai\":2.8000000000000003},{\"giveScore\":7,\"idPoint\":\"1747915763\",\"nilai\":2.1},{\"giveScore\":7,\"idPoint\":\"1747915766\",\"nilai\":2.1}]},{\"bobotPoint\":\"0.40\",\"idBidang\":\"4\",\"nilaiAKhirPerPoint\":\"2.83\",\"pairNilaiXidPoint\":[{\"giveScore\":7,\"idPoint\":\"1747915755\",\"nilai\":2.1},{\"giveScore\":7.1,\"idPoint\":\"1747915761\",\"nilai\":4.97}]},{\"bobotPoint\":\"0.20\",\"idBidang\":\"5\",\"nilaiAKhirPerPoint\":\"1.40\",\"pairNilaiXidPoint\":[{\"giveScore\":7,\"idPoint\":\"1747915759\",\"nilai\":2.1},{\"giveScore\":7,\"idPoint\":\"1747915760\",\"nilai\":1.75},{\"giveScore\":7,\"idPoint\":\"1747915768\",\"nilai\":1.4000000000000001},{\"giveScore\":7,\"idPoint\":\"1747915770\",\"nilai\":1.75}]}]', '2021-11-08 04:24:40');
 
 -- --------------------------------------------------------
 
@@ -173,6 +156,20 @@ INSERT INTO `tb_point` (`id_point`, `id_bidang`, `isi_point`, `bobot`, `id_jabat
 (1747915768, 5, 'Loyalitas dalam kerja', 0.2, 7, 3, '', '2021-11-08 04:07:21'),
 (1747915769, 1, 'Ketepatan dalam Laporan', 0.2, 7, 4, '', '2021-11-08 03:59:32'),
 (1747915770, 5, 'Tanggung jawab atas job yang diterima', 0.25, 7, 4, '', '2021-11-08 04:07:21');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_rules`
+--
+
+CREATE TABLE `tb_rules` (
+  `id_rules` bigint(20) NOT NULL,
+  `jabatan` int(11) NOT NULL,
+  `rules` longtext NOT NULL,
+  `added_on` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `added_by` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -356,6 +353,12 @@ ALTER TABLE `tb_point`
   ADD PRIMARY KEY (`id_point`);
 
 --
+-- Indexes for table `tb_rules`
+--
+ALTER TABLE `tb_rules`
+  ADD PRIMARY KEY (`id_rules`);
+
+--
 -- Indexes for table `tb_sub_point`
 --
 ALTER TABLE `tb_sub_point`
@@ -387,19 +390,25 @@ ALTER TABLE `tb_jabatan`
 -- AUTO_INCREMENT for table `tb_pengumuman`
 --
 ALTER TABLE `tb_pengumuman`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tb_penilaian`
 --
 ALTER TABLE `tb_penilaian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tb_point`
 --
 ALTER TABLE `tb_point`
   MODIFY `id_point` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1747915771;
+
+--
+-- AUTO_INCREMENT for table `tb_rules`
+--
+ALTER TABLE `tb_rules`
+  MODIFY `id_rules` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tb_sub_point`

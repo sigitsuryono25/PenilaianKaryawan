@@ -23,8 +23,8 @@ class MonitoringFragment : Fragment(R.layout.activity_monitoring) {
         super.onViewCreated(view, savedInstanceState)
         binding = ActivityMonitoringBinding.bind(view)
 
-        vm = ViewModelProvider(this).get(PenilaianViewModel::class.java)
-        if (Prefs.getString(Constant.JABATAN).equals("7")) {
+        vm = ViewModelProvider(this)[PenilaianViewModel::class.java]
+        if (Prefs.getStringSet(Constant.RULES, mutableSetOf()).isEmpty()) {
             vm.getPenilaianByUser(Prefs.getString(Constant.USERID))
         } else {
             vm.getPenilaian(Prefs.getString(Constant.USERID))

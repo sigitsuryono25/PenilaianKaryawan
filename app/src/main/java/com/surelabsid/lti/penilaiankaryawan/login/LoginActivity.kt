@@ -58,6 +58,7 @@ class LoginActivity : AppCompatActivity() {
         Prefs.putString(Constant.JABATAN, user.dataUser?.idJabatan)
         Prefs.putString(Constant.NAMA_JABATAN, user.dataUser?.namaJabatan)
         Prefs.putString(Constant.TERDAFTAR_PADA, user.dataUser?.createdAt)
+        Prefs.putStringSet(Constant.RULES, user.dataUser?.rules?.rules?.toMutableSet())
 
         Intent(this, MainActivity::class.java).apply {
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)

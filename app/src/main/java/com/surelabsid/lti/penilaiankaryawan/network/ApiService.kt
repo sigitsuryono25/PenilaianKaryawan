@@ -21,7 +21,7 @@ interface ApiService {
 
 
     @GET("api/user/jabatan")
-    suspend fun getJabatan(): ResponseJabatan
+    suspend fun getJabatan(@Query("level") level: String?): ResponseJabatan
 
     @GET("api/penilaian/param")
     suspend fun getParam(@Query("id_jabatan") idJabatan: String?): ResponseParams

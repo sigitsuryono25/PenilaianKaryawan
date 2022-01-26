@@ -38,6 +38,9 @@ data class DataUser(
 	@field:SerializedName("created_at")
 	val createdAt: String? = null,
 
+	@field:SerializedName("rules")
+	val rules: Rules? = null,
+
 	@field:SerializedName("userid")
 	val userid: String? = null,
 
@@ -46,4 +49,23 @@ data class DataUser(
 
 	@field:SerializedName("nama_jabatan")
 	val namaJabatan: String? = null
+) : Parcelable
+
+@Parcelize
+data class Rules(
+
+	@field:SerializedName("added_by")
+	val addedBy: String? = null,
+
+	@field:SerializedName("jabatan")
+	val jabatan: String? = null,
+
+	@field:SerializedName("id_rules")
+	val idRules: String? = null,
+
+	@field:SerializedName("rules")
+	val rules: List<String?>? = null,
+
+	@field:SerializedName("added_on")
+	val addedOn: String? = null
 ) : Parcelable

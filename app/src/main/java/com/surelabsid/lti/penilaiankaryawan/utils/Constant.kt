@@ -8,6 +8,7 @@ object Constant {
     const val USERID = "userid"
     const val NAMA = "nama"
     const val JABATAN = "jabatan"
+    const val RULES = "rules"
 
     const val PUBLIC_ASSETS = NetworkModule.BASE_URL + "assets/public/pengumuman/"
 }

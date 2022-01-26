@@ -14,7 +14,7 @@ class PenilaianActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_penilaian)
 
-        if (Prefs.getString(Constant.JABATAN).equals("7")) {
+        if (Prefs.getStringSet(Constant.RULES, mutableSetOf()).isEmpty()) {
             changeFragment(MonitoringFragment(), "Hasil Penilaian Anda")
         } else {
             changeFragment(MonitoringFragment(), "Monitoring Hasil Penilaian")

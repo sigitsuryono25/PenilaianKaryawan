@@ -1,6 +1,5 @@
 package com.surelabsid.lti.penilaiankaryawan
 
-import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -36,8 +35,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.pkp.setOnClickListener {
-            if (Prefs.getString(Constant.JABATAN).equals("7")) {
-                HomeFragment.setAlert("Menu tidak tersedia dilevel anda", this)
+            if (Prefs.getStringSet(Constant.RULES, mutableSetOf()).isEmpty()) {
+                HomeFragment.setAlert(
+                    "Menu tidak tersedia dilevel anda atau admin belum mengatur anda berhak menilai level mana",
+                    this
+                )
+
                 return@setOnClickListener
             }
             Intent(this@MainActivity, PkpActivity::class.java).apply {

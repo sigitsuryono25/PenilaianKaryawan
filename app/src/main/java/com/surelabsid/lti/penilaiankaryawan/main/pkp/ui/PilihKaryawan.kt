@@ -8,12 +8,14 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.pixplicity.easyprefs.library.Prefs
 import com.surelabsid.lti.penilaiankaryawan.R
 import com.surelabsid.lti.penilaiankaryawan.databinding.FragmentPilihKaryawanBinding
 import com.surelabsid.lti.penilaiankaryawan.main.pkp.DaftarKaryawanActivity
 import com.surelabsid.lti.penilaiankaryawan.main.pkp.PkpViewModel
 import com.surelabsid.lti.penilaiankaryawan.response.DataKaryawanItem
 import com.surelabsid.lti.penilaiankaryawan.response.ResponseJabatan
+import com.surelabsid.lti.penilaiankaryawan.utils.Constant
 import es.dmoral.toasty.Toasty
 
 
@@ -108,7 +110,7 @@ class PilihKaryawan : Fragment(R.layout.fragment_pilih_karyawan) {
 
 
     private fun getDataJabatan() {
-        vm.getJabatan()
+        vm.getJabatan(Prefs.getString(Constant.JABATAN))
     }
 
     companion object {

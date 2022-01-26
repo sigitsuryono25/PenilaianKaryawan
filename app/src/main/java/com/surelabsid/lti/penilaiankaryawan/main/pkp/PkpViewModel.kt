@@ -46,10 +46,10 @@ class PkpViewModel : BaseViewModel() {
 
     }
 
-    fun getJabatan(){
+    fun getJabatan(level: String?){
         viewModelScope.launch {
             try {
-                val data = apiService.getJabatan()
+                val data = apiService.getJabatan(level)
                 _dataJabatan.postValue(data)
                 _isLoading.postValue(View.GONE)
             } catch (e: Throwable) {

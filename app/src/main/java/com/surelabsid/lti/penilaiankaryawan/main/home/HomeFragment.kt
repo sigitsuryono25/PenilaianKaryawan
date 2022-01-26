@@ -73,8 +73,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.shimmerPengumuman.startShimmer()
 
         binding.pkp.setOnClickListener {
-            if (Prefs.getString(Constant.JABATAN).equals("7")) {
-                setAlert("Menu tidak tersedia dilevel anda", requireActivity())
+            if (Prefs.getStringSet(Constant.RULES, mutableSetOf()).isEmpty()) {
+                setAlert("Menu tidak tersedia dilevel anda atau admin belum mengatur anda berhak menilai level mana", requireActivity())
                 return@setOnClickListener
             }
             Intent(requireActivity(), PkpActivity::class.java).apply {

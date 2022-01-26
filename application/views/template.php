@@ -108,6 +108,7 @@
 								<i class="mdi mdi-order-bool-descending"></i><span class="hide-menu">Penilaian </span>
 							</a>
 							<ul aria-expanded="false" class="collapse">
+								<li class="sidebar-item"><a href="<?= site_url('rules/list') ?>" class="sidebar-link"><i class="mdi mdi-calendar-check"></i><span class="hide-menu"> Rules Penilaian </span></a></li>
 								<li class="sidebar-item"><a href="<?= site_url('penilaian/result') ?>" class="sidebar-link"><i class="mdi mdi-calendar-check"></i><span class="hide-menu"> Hasil </span></a></li>
 							</ul>
 						</li>

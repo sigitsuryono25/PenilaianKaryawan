@@ -98,3 +98,12 @@ $route['user/action-add'] = "User/insertData";
 $route['user/form-edit'] = "User/formEdit";
 $route['user/action-update'] = "User/editData";
 $route['user/action-delete'] = "User/hapusData";
+
+
+//rules
+$route['rules/form-rules'] = "Rules/formRules";
+$route['rules/add-rules'] = "Rules/addRules";
+$route['rules/list'] = "Rules/rulesData";
+$route['rules/action-delete'] = "Rules/deleteRules";
+$route['rules/action-update'] = "Rules/updateRules";
+$route['rules/form-edit'] = "Rules/formEdit";

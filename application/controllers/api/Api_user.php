@@ -24,7 +24,7 @@ class Api_user extends Baseapi
 	{
 		$p = $this->input->get('p');
 		$idJabatan = $this->input->get('id_jabatan');
-		
+
 		$page = (!empty($p)) ? $p : 0;
 		$limit = 20;
 		$nextLimit = $page * $limit;
@@ -39,9 +39,16 @@ class Api_user extends Baseapi
 
 	public function getJabatan()
 	{
-		$jabatan = $this->db->query("SELECT * FROM tb_jabatan")->result();
-		if(!empty($jabatan)){
-			$this->success("data ditemukan", "data_jabatan", $jabatan);
+		$level = $this->input->get('level');
+		$rules = $this->db->query("SELECT * FROM tb_rules WHERE jabatan IN ('$level')")->row();
+		if (!empty($rules)) {
+			$selectedRules = json_decode($rules->rules);
+			$jabatan = $this->db->select("*")->from('tb_jabatan')->where_in('id_jabatan', $selectedRules)->get()->result();
+			if (!empty($jabatan)) {
+				$this->success("data ditemukan", "data_jabatan", $jabatan);
+			} else {
+				$this->notFound();
+			}
 		}else{
 			$this->notFound();
 		}

@@ -34,7 +34,7 @@ class PkpActivity : AppCompatActivity() {
             R.id.presensi -> {
                 if(Prefs.contains(Constant.IS_SELECTED_KAR) && Prefs.getBoolean(Constant.IS_SELECTED_KAR)){
                     Intent(this, WebViewActivity::class.java).apply {
-                        putExtra("url", "http://103.247.14.100:8081/iclock/accounts/login/?next=/iclock/data/iclock/")
+                        putExtra("url", Prefs.getString(Constant.URL_PRESENSI))
                         startActivity(this)
                     }
                 }

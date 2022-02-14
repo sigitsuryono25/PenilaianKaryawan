@@ -14,4 +14,7 @@
     <string name="selengkapnya">Selengkapnya</string>
     <string name="pkp">PKP</string>
     <string name="logout">Logout</string>
+    <string name="forward">Maju</string>
+    <string name="back">Kembali</string>
+    <string name="open_with_chrome">Buka dengan Chrome</string>
 </resources>

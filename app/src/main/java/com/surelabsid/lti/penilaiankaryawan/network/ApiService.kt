@@ -39,6 +39,9 @@ interface ApiService {
     @GET("api/pengumuman/list")
     suspend fun getPengumuman(): ResponsePengumuman
 
+    @GET("api/settings")
+    suspend fun getSettings(): ResponseSettings
+
     /**
      * testing data
      */

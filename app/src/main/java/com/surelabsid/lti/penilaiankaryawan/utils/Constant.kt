@@ -9,7 +9,7 @@ object Constant {
     const val NAMA = "nama"
     const val JABATAN = "jabatan"
     const val RULES = "rules"
-
+    const val URL_PRESENSI = "urlPresensi"
     const val IS_SELECTED_KAR = "isSelectedKar"
 
     const val PUBLIC_ASSETS = NetworkModule.BASE_URL + "assets/public/pengumuman/"

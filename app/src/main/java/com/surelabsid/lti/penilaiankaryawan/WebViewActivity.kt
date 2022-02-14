@@ -1,28 +1,35 @@
 package com.surelabsid.lti.penilaiankaryawan
 
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.print.PrintAttributes
 import android.print.PrintDocumentAdapter
 import android.print.PrintManager
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.surelabsid.lti.penilaiankaryawan.databinding.ActivityWebViewBinding
 
 class WebViewActivity : AppCompatActivity() {
     private var url: String? = null
     private var data: String? = null
-    private lateinit var binding :ActivityWebViewBinding
+    private lateinit var binding: ActivityWebViewBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityWebViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+        }
 
 
         url = intent.getStringExtra("url")
@@ -36,7 +43,6 @@ class WebViewActivity : AppCompatActivity() {
                 override fun onProgressChanged(view: WebView?, newProgress: Int) {
                     super.onProgressChanged(view, newProgress)
 
-
                 }
             }
 
@@ -44,7 +50,10 @@ class WebViewActivity : AppCompatActivity() {
             object : WebViewClient() {
                 override fun onPageFinished(view: WebView?, url: String?) {
                     super.onPageFinished(view, url)
-
+                    binding.progress.visibility = View.GONE
+                    supportActionBar?.apply {
+                        title = view?.title
+                    }
                 }
             }
 
@@ -64,17 +73,17 @@ class WebViewActivity : AppCompatActivity() {
          * @param3 order
          * @param4 title
          */
-//        menu?.add(0, 1, 0, getString(R.string.forward))
-//        menu?.add(0, 2, 0, getString(R.string.back))
-//        if (url?.isNotEmpty() == true)
-//            menu?.add(0, 3, 0, getString(R.string.open_with_chrome))
-//
-//        menu?.add(0, 4, 0, getString(R.string.web_page_print))
+        menu?.add(0, 1, 0, getString(R.string.forward))
+        menu?.add(0, 2, 0, getString(R.string.back))
+        if (url?.isNotEmpty() == true)
+            menu?.add(0, 3, 0, getString(R.string.open_with_chrome))
+
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            android.R.id.home -> finish()
             1 -> {
                 if (binding.webView.canGoForward()) {
                     binding.webView.goForward()
@@ -86,11 +95,20 @@ class WebViewActivity : AppCompatActivity() {
                 }
             }
             3 -> {
-                val i = Intent(Intent.ACTION_VIEW)
-                i.setPackage("com.android.chrome")
-                i.action = Intent.ACTION_VIEW
-                i.data = Uri.parse(url)
-                startActivity(i)
+                try {
+                    val i = Intent(Intent.ACTION_VIEW)
+                    i.setPackage("com.android.chrome")
+                    i.action = Intent.ACTION_VIEW
+                    i.data = Uri.parse(url)
+                    startActivity(i)
+                } catch (e: ActivityNotFoundException) {
+                    e.printStackTrace()
+                    Toast.makeText(
+                        this@WebViewActivity,
+                        "Google Chrome not installed",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
             4 -> {
                 createWebPrintJob(this, binding.webView)

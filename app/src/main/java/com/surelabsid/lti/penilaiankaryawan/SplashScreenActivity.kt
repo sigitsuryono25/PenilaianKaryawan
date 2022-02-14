@@ -13,14 +13,17 @@ import com.google.firebase.ktx.app
 import com.google.firebase.messaging.FirebaseMessaging
 import com.pixplicity.easyprefs.library.Prefs
 import com.surelabsid.lti.penilaiankaryawan.login.LoginActivity
+import com.surelabsid.lti.penilaiankaryawan.network.NetworkModule
 import com.surelabsid.lti.penilaiankaryawan.utils.Constant
+import kotlinx.coroutines.*
+import java.lang.Exception
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreenActivity : AppCompatActivity() {
 
 
     private lateinit var handler: Handler
-
+    private lateinit var job: Job
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -32,15 +35,25 @@ class SplashScreenActivity : AppCompatActivity() {
         }
 
 
-        handler = Handler(Looper.getMainLooper())
-        handler.postDelayed({
-            this.checkSession()
-        }, 3000)
+        job = CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val settings = NetworkModule.getService().getSettings()
+                delay(3000)
+                MainScope().launch {
+                    if(settings.code == 200){
+                        Prefs.putString(Constant.URL_PRESENSI, settings.settings?.endPointPresensi)
+                        checkSession()
+                    }
+                }
+            }catch (e: Throwable){
+                e.printStackTrace()
+            }
+        }
     }
 
     override fun onStop() {
         super.onStop()
-        handler.removeCallbacksAndMessages(null)
+        job.cancel()
     }
 
     private fun checkSession() {

@@ -1,6 +1,7 @@
 package com.surelabsid.lti.penilaiankaryawan.main.monitoring
 
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -32,9 +33,14 @@ class PenilaianActivity : AppCompatActivity() {
         }
     }
 
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> finish()
+            0 -> {
+
+            }
+
         }
         return super.onOptionsItemSelected(item)
     }

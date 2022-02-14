@@ -54,6 +54,8 @@ class PilihKaryawan : Fragment(R.layout.fragment_pilih_karyawan) {
                 return@setOnClickListener
             }
 
+            Prefs.putBoolean(Constant.IS_SELECTED_KAR, isSelectedKar)
+
             requireActivity().supportFragmentManager.beginTransaction().replace(R.id.containerPkp, PenilaianKaryawan.newInstance(dataKaryawanItem, selectedIdJabatan))
                 .commit()
         }

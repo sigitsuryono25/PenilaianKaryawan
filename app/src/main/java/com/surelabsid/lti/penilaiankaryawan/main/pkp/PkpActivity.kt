@@ -1,10 +1,16 @@
 package com.surelabsid.lti.penilaiankaryawan.main.pkp
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import com.pixplicity.easyprefs.library.Prefs
 import com.surelabsid.lti.penilaiankaryawan.R
+import com.surelabsid.lti.penilaiankaryawan.WebViewActivity
 import com.surelabsid.lti.penilaiankaryawan.databinding.ActivityPkpBinding
 import com.surelabsid.lti.penilaiankaryawan.main.pkp.ui.PilihKaryawan
+import com.surelabsid.lti.penilaiankaryawan.utils.Constant
 
 class PkpActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPkpBinding
@@ -17,4 +23,24 @@ class PkpActivity : AppCompatActivity() {
             .commit()
 
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_penilaian, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.presensi -> {
+                if(Prefs.contains(Constant.IS_SELECTED_KAR) && Prefs.getBoolean(Constant.IS_SELECTED_KAR)){
+                    Intent(this, WebViewActivity::class.java).apply {
+                        putExtra("url", "http://103.247.14.100:8081/iclock/accounts/login/?next=/iclock/data/iclock/")
+                        startActivity(this)
+                    }
+                }
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
 }

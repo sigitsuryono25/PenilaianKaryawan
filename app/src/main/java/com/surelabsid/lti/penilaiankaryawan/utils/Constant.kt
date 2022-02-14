@@ -10,5 +10,7 @@ object Constant {
     const val JABATAN = "jabatan"
     const val RULES = "rules"
 
+    const val IS_SELECTED_KAR = "isSelectedKar"
+
     const val PUBLIC_ASSETS = NetworkModule.BASE_URL + "assets/public/pengumuman/"
 }

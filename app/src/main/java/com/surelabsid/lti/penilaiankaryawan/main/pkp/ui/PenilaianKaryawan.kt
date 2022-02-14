@@ -72,8 +72,9 @@ class PenilaianKaryawan : Fragment(R.layout.fragment_penilaian_karyawan) {
                 .setMessage(it.message)
                 .setTitle("Info")
                 .setPositiveButton("Oke") { d, _ ->
-//                    requireActivity().finish()
+                    requireActivity().finish()
                     d.dismiss()
+                    Prefs.remove(Constant.IS_SELECTED_KAR)
                 }
                 .create().show()
         }

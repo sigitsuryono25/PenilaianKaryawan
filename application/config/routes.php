@@ -65,6 +65,7 @@ $route['api/penilaian/get-penilaian'] = "api/Api_params/getPenilaian";
 $route['api/penilaian/get-penilaian-by-user'] = "api/Api_params/getPenilaianByUser";
 $route['api/pengumuman/list'] = "api/Api_pengumuman/getAllPengumuman";
 $route['api/pengumuman/detail'] = "api/Api_pengumuman/detailPengumuman";
+$route['api/settings'] = "api/Api_settings/getSettings";
 
 //bidang
 $route['bidang/form-add'] = "Bidang/formAdd";
@@ -107,3 +108,8 @@ $route['rules/list'] = "Rules/rulesData";
 $route['rules/action-delete'] = "Rules/deleteRules";
 $route['rules/action-update'] = "Rules/updateRules";
 $route['rules/form-edit'] = "Rules/formEdit";
+
+
+//settings
+$route['settings'] = "Settings/index";
+$route['settings/update'] = "Settings/updateData";

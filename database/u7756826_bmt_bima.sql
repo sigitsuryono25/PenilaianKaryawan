@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 4.9.7
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Jan 26, 2022 at 05:27 AM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 8.0.13
+-- Host: localhost:3306
+-- Generation Time: Feb 14, 2022 at 02:18 PM
+-- Server version: 10.3.32-MariaDB-cll-lve
+-- PHP Version: 7.3.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_kspps_bmt_bima`
+-- Database: `u7756826_bmt_bima`
 --
 
 -- --------------------------------------------------------
@@ -88,6 +89,16 @@ CREATE TABLE `tb_pengumuman` (
   `added_on` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `tb_pengumuman`
+--
+
+INSERT INTO `tb_pengumuman` (`id`, `judul`, `file`, `cover`, `keterangan`, `added_by`, `added_on`) VALUES
+(6, 'Pengumuman Libur Akhir Tahun BMT BIMA', '[\"c169c6f93bd14bea247ac681a1575ad6.pdf\",\"41719958f3535da5422995c26fa39a7c.pdf\",\"260eee00a123472c536169bc78ceac51.pdf\"]', 'e854f6111013908a68ab95b516529f08.jpg', 'Pengumuman Libur Akhir Tahun BMT BIMA', '', '2021-10-29 07:57:38'),
+(18, 'Prosedur Kerja Selama Pandemi', NULL, '', '<p>Prosedur Kerja Selama Pandemi&nbsp;Prosedur Kerja Selama Pandemi&nbsp;<span style=\"font-size: 0.875rem;\">Prosedur Kerja Selama Pandemi&nbsp;Prosedur Kerja Selama Pandemi&nbsp;</span><span style=\"font-size: 0.875rem;\">Prosedur Kerja Selama Pandemi&nbsp;Prosedur Kerja Selama Pandemi&nbsp;</span><span style=\"font-size: 0.875rem;\">Prosedur Kerja Selama Pandemi&nbsp;Prosedur Kerja Selama Pandemi&nbsp;</span><span style=\"font-size: 0.875rem;\">Prosedur Kerja Selama Pandemi&nbsp;Prosedur Kerja Selama Pandemi&nbsp;</span><span style=\"font-size: 0.875rem;\">Prosedur Kerja Selama Pandemi&nbsp;Prosedur Kerja Selama Pandemi&nbsp;</span><span style=\"font-size: 0.875rem;\">Prosedur Kerja Selama Pandemi&nbsp;Prosedur Kerja Selama Pandemi&nbsp;</span><span style=\"font-size: 0.875rem;\">Prosedur Kerja Selama Pandemi&nbsp;Prosedur Kerja Selama Pandemi&nbsp;</span><span style=\"font-size: 0.875rem;\">Prosedur Kerja Selama Pandemi&nbsp;Prosedur Kerja Selama Pandemi&nbsp;</span><span style=\"font-size: 0.875rem;\">Prosedur Kerja Selama Pandemi&nbsp;Prosedur Kerja Selama Pandemi&nbsp;</span><br></p>', '', '2021-11-01 07:00:58'),
+(19, 'Pengumuman Kenaikan Jabatan', NULL, '', '<p>Pengumuman Kenaikan Jabatan&nbsp;Pengumuman Kenaikan Jabatan&nbsp;<span style=\"font-size: 0.875rem;\">Pengumuman Kenaikan Jabatan&nbsp;Pengumuman Kenaikan Jabatan&nbsp;</span><span style=\"font-size: 0.875rem;\">Pengumuman Kenaikan Jabatan&nbsp;Pengumuman Kenaikan Jabatan&nbsp;</span><span style=\"font-size: 0.875rem;\">Pengumuman Kenaikan Jabatan&nbsp;Pengumuman Kenaikan Jabatan&nbsp;</span><span style=\"font-size: 0.875rem;\">Pengumuman Kenaikan Jabatan&nbsp;Pengumuman Kenaikan Jabatan&nbsp;</span><span style=\"font-size: 0.875rem;\">Pengumuman Kenaikan Jabatan&nbsp;Pengumuman Kenaikan Jabatan&nbsp;</span><span style=\"font-size: 0.875rem;\">Pengumuman Kenaikan Jabatan&nbsp;Pengumuman Kenaikan Jabatan&nbsp;</span><span style=\"font-size: 0.875rem;\">Pengumuman Kenaikan Jabatan&nbsp;Pengumuman Kenaikan Jabatan&nbsp;</span><span style=\"font-size: 0.875rem;\">Pengumuman Kenaikan Jabatan&nbsp;Pengumuman Kenaikan Jabatan&nbsp;</span><span style=\"font-size: 0.875rem;\">Pengumuman Kenaikan Jabatan&nbsp;Pengumuman Kenaikan Jabatan&nbsp;</span><br></p>', '', '2021-11-01 07:02:44'),
+(36, 'DIKLAT Staf Pusat Manajemen Proyek PT. PLN (Persero)', '[\"f39f60644877d76392d1a7b64e824929.jpg\"]', '9bc443b75aef8fcfb53c30445c172fa4.jpg', '<p>DIKLAT Staf Pusat Manajemen Proyek PT. PLN (Persero)<br></p>', '', '2021-11-08 03:20:31');
+
 -- --------------------------------------------------------
 
 --
@@ -101,6 +112,13 @@ CREATE TABLE `tb_penilaian` (
   `data_penilaian` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`data_penilaian`)),
   `dinilai_pada` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_penilaian`
+--
+
+INSERT INTO `tb_penilaian` (`id`, `dinilai_oleh`, `id_karyawan`, `data_penilaian`, `dinilai_pada`) VALUES
+(56, '1634785822463', '1634785822425', '[{\"bobotPoint\":\"0.15\",\"idBidang\":\"1\",\"nilaiAkhirPerPoint\":\"1.05\",\"nilaiDanPoint\":[{\"giveScore\":7,\"idPoint\":\"1747915758\",\"nilai\":2.8000000000000003},{\"giveScore\":7,\"idPoint\":\"1747915764\",\"nilai\":1.4000000000000001},{\"giveScore\":7,\"idPoint\":\"1747915765\",\"nilai\":1.4000000000000001},{\"giveScore\":7,\"idPoint\":\"1747915769\",\"nilai\":1.4000000000000001}]},{\"bobotPoint\":\"0.15\",\"idBidang\":\"2\",\"nilaiAkhirPerPoint\":\"1.05\",\"nilaiDanPoint\":[{\"giveScore\":7,\"idPoint\":\"1747915756\",\"nilai\":2.8000000000000003},{\"giveScore\":7,\"idPoint\":\"1747915762\",\"nilai\":2.1},{\"giveScore\":7,\"idPoint\":\"1747915767\",\"nilai\":2.1}]},{\"bobotPoint\":\"0.10\",\"idBidang\":\"3\",\"nilaiAkhirPerPoint\":\"0.70\",\"nilaiDanPoint\":[{\"giveScore\":7,\"idPoint\":\"1747915757\",\"nilai\":2.8000000000000003},{\"giveScore\":7,\"idPoint\":\"1747915763\",\"nilai\":2.1},{\"giveScore\":7,\"idPoint\":\"1747915766\",\"nilai\":2.1}]},{\"bobotPoint\":\"0.40\",\"idBidang\":\"4\",\"nilaiAkhirPerPoint\":\"2.80\",\"nilaiDanPoint\":[{\"giveScore\":7,\"idPoint\":\"1747915755\",\"nilai\":2.1},{\"giveScore\":7,\"idPoint\":\"1747915761\",\"nilai\":4.8999999999999995}]},{\"bobotPoint\":\"0.20\",\"idBidang\":\"5\",\"nilaiAkhirPerPoint\":\"1.40\",\"nilaiDanPoint\":[{\"giveScore\":7,\"idPoint\":\"1747915759\",\"nilai\":2.1},{\"giveScore\":7,\"idPoint\":\"1747915760\",\"nilai\":1.75},{\"giveScore\":7,\"idPoint\":\"1747915768\",\"nilai\":1.4000000000000001},{\"giveScore\":7,\"idPoint\":\"1747915770\",\"nilai\":1.75}]}]', '2022-01-20 02:58:05');
 
 -- --------------------------------------------------------
 
@@ -169,7 +187,33 @@ CREATE TABLE `tb_rules` (
   `rules` longtext NOT NULL,
   `added_on` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `added_by` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_rules`
+--
+
+INSERT INTO `tb_rules` (`id_rules`, `jabatan`, `rules`, `added_on`, `added_by`) VALUES
+(1, 2, '[\"4\",\"5\",\"6\"]', '2022-01-26 03:54:11', ''),
+(2, 6, '[\"2\",\"4\",\"5\",\"7\"]', '2022-01-26 06:27:53', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_settings`
+--
+
+CREATE TABLE `tb_settings` (
+  `id` int(11) NOT NULL,
+  `end_point_presensi` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_settings`
+--
+
+INSERT INTO `tb_settings` (`id`, `end_point_presensi`) VALUES
+(1, 'http://103.247.14.100:8081/iclock/accounts/login/?next=/iclock/data/iclock/');
 
 -- --------------------------------------------------------
 
@@ -359,6 +403,12 @@ ALTER TABLE `tb_rules`
   ADD PRIMARY KEY (`id_rules`);
 
 --
+-- Indexes for table `tb_settings`
+--
+ALTER TABLE `tb_settings`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tb_sub_point`
 --
 ALTER TABLE `tb_sub_point`
@@ -390,13 +440,13 @@ ALTER TABLE `tb_jabatan`
 -- AUTO_INCREMENT for table `tb_pengumuman`
 --
 ALTER TABLE `tb_pengumuman`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `tb_penilaian`
 --
 ALTER TABLE `tb_penilaian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `tb_point`
@@ -408,7 +458,13 @@ ALTER TABLE `tb_point`
 -- AUTO_INCREMENT for table `tb_rules`
 --
 ALTER TABLE `tb_rules`
-  MODIFY `id_rules` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_rules` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tb_settings`
+--
+ALTER TABLE `tb_settings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tb_sub_point`

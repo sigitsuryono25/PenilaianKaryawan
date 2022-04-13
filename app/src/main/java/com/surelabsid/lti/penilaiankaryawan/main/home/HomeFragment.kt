@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.pixplicity.easyprefs.library.Prefs
 import com.surelabsid.lti.penilaiankaryawan.R
 import com.surelabsid.lti.penilaiankaryawan.databinding.FragmentHomeBinding
+import com.surelabsid.lti.penilaiankaryawan.main.lapkeu.LapKeuActivity
 import com.surelabsid.lti.penilaiankaryawan.main.monitoring.PenilaianActivity
 import com.surelabsid.lti.penilaiankaryawan.main.pengumuman.AllPengumumanActivity
 import com.surelabsid.lti.penilaiankaryawan.main.pengumuman.DetailPengumumanActivity
@@ -78,6 +79,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 return@setOnClickListener
             }
             Intent(requireActivity(), PkpActivity::class.java).apply {
+                startActivity(this)
+            }
+        }
+
+        binding.lapKeu.setOnClickListener{
+            if (Prefs.getStringSet(Constant.RULES, mutableSetOf()).isEmpty()) {
+                setAlert("Menu tidak tersedia dilevel anda atau admin belum mengatur anda berhak menilai level mana", requireActivity())
+                return@setOnClickListener
+            }
+            Intent(requireActivity(), LapKeuActivity::class.java).apply {
                 startActivity(this)
             }
         }

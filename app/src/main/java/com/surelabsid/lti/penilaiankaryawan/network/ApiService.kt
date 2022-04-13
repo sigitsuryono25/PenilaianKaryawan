@@ -1,6 +1,7 @@
 package com.surelabsid.lti.penilaiankaryawan.network
 
 import com.surelabsid.lti.penilaiankaryawan.model.PenilaianSend
+import com.surelabsid.lti.penilaiankaryawan.model.RequestLapKeu
 import com.surelabsid.lti.penilaiankaryawan.model.User
 import com.surelabsid.lti.penilaiankaryawan.response.*
 import retrofit2.http.Body
@@ -41,6 +42,19 @@ interface ApiService {
 
     @GET("api/settings")
     suspend fun getSettings(): ResponseSettings
+
+    /**
+     * Laporan Keuangan
+     */
+
+    @POST("kirim/keuangan/get")
+    suspend fun getDataNeraca(@Body requestLapKeu: RequestLapKeu?): ResponseDataNeraca
+
+    @POST("kirim/keuangan/get")
+    suspend fun getRugiLaba(@Body requestLapKeu: RequestLapKeu?): ResponseRugiLaba
+
+    @POST("kirim/keuangan/get")
+    suspend fun getDataNpf(@Body requestLapKeu: RequestLapKeu?): ResponseDataNPF
 
     /**
      * testing data

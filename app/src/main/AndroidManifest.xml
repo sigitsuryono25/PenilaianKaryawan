@@ -17,6 +17,18 @@
         android:theme="@style/Theme.PenilaianKaryawan"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".main.lapkeu.adapter.LaporanDataNoaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".main.lapkeu.LaporanDataNpfActivity"
+            android:exported="false" />
+        <activity
+            android:name=".main.lapkeu.LaporanDataNeracaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".main.lapkeu.LapKeuActivity"
+            android:exported="false" />
+        <activity
             android:name=".WebViewActivity"
             android:exported="false" />
         <activity

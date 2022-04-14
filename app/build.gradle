@@ -14,8 +14,8 @@ android {
         applicationId "com.surelabsid.lti.penilaiankaryawan"
         minSdk 23
         targetSdk 31
-        versionCode 3
-        versionName "2alpha30"
+        versionCode 4
+        versionName "2alpha55"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

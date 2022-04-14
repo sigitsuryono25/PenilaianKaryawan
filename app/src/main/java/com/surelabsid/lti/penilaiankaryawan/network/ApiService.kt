@@ -44,6 +44,14 @@ interface ApiService {
     suspend fun getSettings(): ResponseSettings
 
     /**
+     * Laporan Keuangan Bentuk Table
+     */
+
+    @POST("report/neraca")
+    suspend fun getReportNeraca(@Body requestLapKeu: RequestLapKeu?)
+
+
+    /**
      * Laporan Keuangan
      */
 
@@ -55,6 +63,7 @@ interface ApiService {
 
     @POST("kirim/keuangan/get")
     suspend fun getDataNpf(@Body requestLapKeu: RequestLapKeu?): ResponseDataNPF
+
 
     /**
      * testing data

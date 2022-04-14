@@ -17,6 +17,9 @@
         android:theme="@style/Theme.PenilaianKaryawan"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".main.lapkeu.LaporanTableViewActivity"
+            android:exported="false" />
+        <activity
             android:name=".main.lapkeu.adapter.LaporanDataNoaActivity"
             android:exported="false" />
         <activity
@@ -60,11 +63,9 @@
             android:name=".main.monitoring.DetailPenilaianActivity"
             android:exported="false" />
         <activity
-            android:name=".main.monitoring.MonitoringFragment"
-            android:exported="false" />
-        <activity
             android:name=".main.test.TestActivity"
             android:exported="false" />
+
         <activity
             android:name=".main.pkp.DaftarKaryawanActivity"
             android:exported="false" />

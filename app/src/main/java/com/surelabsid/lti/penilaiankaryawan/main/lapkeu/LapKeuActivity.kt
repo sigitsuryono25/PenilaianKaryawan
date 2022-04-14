@@ -3,6 +3,7 @@ package com.surelabsid.lti.penilaiankaryawan.main.lapkeu
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.surelabsid.lti.penilaiankaryawan.databinding.ActivityLapKeuBinding
 import com.surelabsid.lti.penilaiankaryawan.model.DataParam
@@ -64,11 +65,23 @@ class LapKeuActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
                 request = "lapkeu",
                 data01 = data01
             )
-
-            Intent(this, LaporanDataNeracaActivity::class.java).apply {
-                putExtra(LaporanDataNeracaActivity.REQUEST_PARAM, requestLapKeu)
-                startActivity(this)
-            }
+            AlertDialog.Builder(this)
+                .setTitle("Konfirmasi")
+                .setMessage("Tampilkan Laporan dalam bentuk:")
+                .setPositiveButton("Table") { d, i ->
+                    Intent(this, LaporanTableViewActivity::class.java).apply {
+                        putExtra(LaporanTableViewActivity.REQ_LAP_KEU, requestLapKeu)
+                        putExtra(LaporanTableViewActivity.URL_REQ, "report/neraca")
+                        putExtra(LaporanTableViewActivity.TITLE_REQ, "Laporan Neraca")
+                        startActivity(this)
+                    }
+                }
+                .setNegativeButton("List/Daftar") { d, i ->
+                    Intent(this, LaporanDataNeracaActivity::class.java).apply {
+                        putExtra(LaporanDataNeracaActivity.REQUEST_PARAM, requestLapKeu)
+                        startActivity(this)
+                    }
+                }.create().show()
         } else if (view?.tag == "laba-rugi") {
             val data01 = DataParam(
                 tgl = dat,
@@ -80,10 +93,23 @@ class LapKeuActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
                 data01 = data01
             )
 
-            Intent(this, LaporanDataNeracaActivity::class.java).apply {
-                putExtra(LaporanDataNeracaActivity.REQUEST_PARAM, requestLapKeu)
-                startActivity(this)
-            }
+            AlertDialog.Builder(this)
+                .setTitle("Konfirmasi")
+                .setMessage("Tampilkan Laporan dalam bentuk:")
+                .setPositiveButton("Table") { d, i ->
+                    Intent(this, LaporanTableViewActivity::class.java).apply {
+                        putExtra(LaporanTableViewActivity.REQ_LAP_KEU, requestLapKeu)
+                        putExtra(LaporanTableViewActivity.URL_REQ, "report/rugi-laba")
+                        putExtra(LaporanTableViewActivity.TITLE_REQ, "Laporan Rugi Laba")
+                        startActivity(this)
+                    }
+                }
+                .setNegativeButton("List/Daftar") { d, i ->
+                    Intent(this, LaporanDataNeracaActivity::class.java).apply {
+                        putExtra(LaporanDataNeracaActivity.REQUEST_PARAM, requestLapKeu)
+                        startActivity(this)
+                    }
+                }.create().show()
         } else if (view?.tag == "npf") {
             val data01 = DataParam(
                 tgl = dat,
@@ -94,10 +120,23 @@ class LapKeuActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
                 data01 = data01
             )
 
-            Intent(this, LaporanDataNpfActivity::class.java).apply {
-                putExtra(LaporanDataNeracaActivity.REQUEST_PARAM, requestLapKeu)
-                startActivity(this)
-            }
+            AlertDialog.Builder(this)
+                .setTitle("Konfirmasi")
+                .setMessage("Tampilkan Laporan dalam bentuk:")
+                .setPositiveButton("Table") { d, i ->
+                    Intent(this, LaporanTableViewActivity::class.java).apply {
+                        putExtra(LaporanTableViewActivity.REQ_LAP_KEU, requestLapKeu)
+                        putExtra(LaporanTableViewActivity.URL_REQ, "report/npf")
+                        putExtra(LaporanTableViewActivity.TITLE_REQ, "Laporan NPF")
+                        startActivity(this)
+                    }
+                }
+                .setNegativeButton("List/Daftar") { d, i ->
+                    Intent(this, LaporanDataNpfActivity::class.java).apply {
+                        putExtra(LaporanDataNeracaActivity.REQUEST_PARAM, requestLapKeu)
+                        startActivity(this)
+                    }
+                }.create().show()
         }
     }
 }

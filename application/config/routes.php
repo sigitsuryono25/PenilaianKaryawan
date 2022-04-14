@@ -109,6 +109,10 @@ $route['rules/action-delete'] = "Rules/deleteRules";
 $route['rules/action-update'] = "Rules/updateRules";
 $route['rules/form-edit'] = "Rules/formEdit";
 
+$route['report/neraca'] = "Report/index";
+$route['report/npf'] = "Report/npf";
+$route['report/rugi-laba'] = "Report/rugiLaba";
+
 
 //settings
 $route['settings'] = "Settings/index";

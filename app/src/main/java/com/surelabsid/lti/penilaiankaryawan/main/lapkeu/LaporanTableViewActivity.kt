@@ -2,6 +2,7 @@ package com.surelabsid.lti.penilaiankaryawan.main.lapkeu
 
 import android.app.ProgressDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -48,7 +49,7 @@ class LaporanTableViewActivity : AppCompatActivity() {
             val gson = Gson()
             val param = gson.toJson(requestData)
             val postData = "q=" + URLEncoder.encode(param)
-            binding.wv.postUrl("${NetworkModule.DEBUG_URL}$url", postData.toByteArray())
+            binding.wv.postUrl("${NetworkModule.BASE_URL}index.php/$url", postData.toByteArray())
         } else {
             pd.dismiss()
             AlertDialog.Builder(this)

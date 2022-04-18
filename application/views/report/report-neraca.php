@@ -29,13 +29,25 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($response as $rs) { ?>
+                        <?php
+                        $total = 0;
+                        foreach ($response as $rs) {
+                        ?>
                             <tr>
                                 <td><?= $rs->nosbb ?></td>
                                 <td><?= $rs->nmsbb ?></td>
-                                <td>Rp. <?= $rs->saldo ?></td>
+                                <td>
+                                    <?php
+                                    // $total += str_replace(",", "", str_replace(".00", "", $rs->saldo));
+                                    echo "Rp. " . $rs->saldo;
+                                    ?>
+                                </td>
                             </tr>
-                        <?php } ?>
+                        <?php
+                            if (strtolower($rs->nmsbb) == "deposit paybmt") {
+                                break;
+                            }
+                        } ?>
                     </tbody>
                 </table>
             </div>

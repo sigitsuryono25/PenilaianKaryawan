@@ -11,18 +11,20 @@ class Report extends CI_Controller
     {
         // $input = file_get_contents("php://input");
         // $json = json_decode($input, true);
-        $dd = $this->input->post('q');
-        // $dd = '{
-        //     "request": "lapkeu",
-        //     "userid": "system",
-        //     "signature": "d3nm@sDevtern",
-        //     "data01": {
-        //         "tgl": "20210201",
-        //         "golac": "nrc",
-        //         "kdloc": "01"
-        //     }
-        // }
-        // ';
+        // $dd = $this->input->post('q');
+        $dd = '{
+            "request": "lapkeu2",
+            "userid": "system",
+            "signature": "d3nm@sDevtern",
+            "data01": {
+                "tgl": "20210201",
+                "golac": "nrc",
+                "kdloc": "01"
+            }
+        }
+        ';
+
+        // die($dd);
 
 
         $curl = curl_init();
@@ -45,11 +47,14 @@ class Report extends CI_Controller
         $response = curl_exec($curl);
 
         curl_close($curl);
-        $data['response'] = json_decode($response)->data01;
+        $data['kiri'] = json_decode($response)->kiri;
+        $data['kanan'] = json_decode($response)->kanan;
+        $data['jumlah_kiri'] = json_decode($response)->jumlah->tot_kiri;
+        $data['jumlah_kanan'] = json_decode($response)->jumlah->tot_kanan;
         $params = json_decode($dd);
         $date = $params->data01->tgl;
         $data['tanggal'] = $this->etc->indonesiaDate(substr($date, 0, 4) . "-" . substr($date, 4, 2) . "-" . substr($date, 6, 2));
-        $this->load->view('report/report-neraca', $data);
+        $this->load->view('report/report-neraca-2', $data);
     }
 
     public function npf()
@@ -101,18 +106,22 @@ class Report extends CI_Controller
     {
         // $input = file_get_contents("php://input");
         // $json = json_decode($input, true);
-        $dd = $this->input->post('q');
-        // $dd = '{
-        //     "request": "lapkeu",
-        //     "userid": "system",
-        //     "signature": "d3nm@sDevtern",
-        //     "data01": {
-        //         "tgl": "20210201",
-        //         "golac": "lr",
-        //         "kdloc": "01"
-        //     }
-        // }
-        // ';
+        // $dd = $this->input->post('q');
+        // $ddDecode = json_decode($dd, true);
+        // $ddDecode['request'] = 'lapkeu2';
+        $dd = '{
+            "request": "lapkeu2",
+            "userid": "system",
+            "signature": "d3nm@sDevtern",
+            "data01": {
+                "tgl": "20220401",
+                "golac": "lr",
+                "kdloc": "01"
+            }
+        }
+        ';
+
+        // $dd = json_encode($ddDecode);
 
 
         $curl = curl_init();
@@ -134,12 +143,14 @@ class Report extends CI_Controller
 
         $response = curl_exec($curl);
 
-        curl_close($curl);
-        $data['response'] = json_decode($response)->data01;
+        $data['kiri'] = json_decode($response)->kiri;
+        $data['kanan'] = json_decode($response)->kanan;
+        $data['jumlah_kiri'] = json_decode($response)->jumlah->tot_kiri;
+        $data['jumlah_kanan'] = json_decode($response)->jumlah->tot_kanan;
         $params = json_decode($dd);
         $date = $params->data01->tgl;
         $data['tanggal'] = $this->etc->indonesiaDate(substr($date, 0, 4) . "-" . substr($date, 4, 2) . "-" . substr($date, 6, 2));
-        $this->load->view('report/report-rugi-laba', $data);
+        $this->load->view('report/report-rugi-laba-2', $data);
     }
 }
 

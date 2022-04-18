@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="<?php echo base_url()?>/assets/images/favicon.png">
-    <title>Matrix Template - The Ultimate Multipurpose admin template</title>
+    <title>BMT BIMA Login Portal Admin</title>
     <!-- Custom CSS -->
     <link href="<?php echo base_url()?>/dist/css/style.min.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -43,7 +43,7 @@
                 <div id="loginform">
                     <div class="text-center p-t-20 p-b-20">
                         <span class="db h3 text-white font-weight-bold">
-							BMT BIMA Logi Portal
+							BMT BIMA Login Portal
 						</span>
                     </div>
                     <!-- Form -->

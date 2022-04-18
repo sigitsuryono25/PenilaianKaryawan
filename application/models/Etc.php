@@ -64,6 +64,12 @@ class Etc extends CI_Model
 		}
 		return $bulan;
 	}
+
+	public function rps($angka)
+    {
+        $rupiah = number_format($angka, 0, ',', '.');
+        return $rupiah;
+    }
 }
 
 /* End of file Etc.php */

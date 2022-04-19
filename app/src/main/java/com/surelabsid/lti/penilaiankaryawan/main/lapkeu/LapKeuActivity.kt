@@ -3,9 +3,9 @@ package com.surelabsid.lti.penilaiankaryawan.main.lapkeu
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.surelabsid.lti.penilaiankaryawan.databinding.ActivityLapKeuBinding
+import com.surelabsid.lti.penilaiankaryawan.main.lapkeu.dialog.PickDateDialog
 import com.surelabsid.lti.penilaiankaryawan.model.DataParam
 import com.surelabsid.lti.penilaiankaryawan.model.RequestLapKeu
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog
@@ -44,6 +44,22 @@ class LapKeuActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
             dpd.show(supportFragmentManager, "npf")
         }
 
+        binding.noa.setOnClickListener {
+            val pickDate = PickDateDialog.newInstance(PickDateDialog.NOA)
+            pickDate.show(supportFragmentManager, PickDateDialog.NOA)
+        }
+
+        binding.angsuran.setOnClickListener {
+            val pickDate = PickDateDialog.newInstance(PickDateDialog.ANGSURAN)
+            pickDate.show(supportFragmentManager, PickDateDialog.ANGSURAN)
+        }
+
+        binding.saldoDeposit.setOnClickListener {
+            val pickDate = PickDateDialog.newInstance(PickDateDialog.RATA_SALDO_TABUNGAN_DEPOSITO)
+            pickDate.show(supportFragmentManager, PickDateDialog.RATA_SALDO_TABUNGAN_DEPOSITO)
+
+        }
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -55,88 +71,59 @@ class LapKeuActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
     override fun onDateSet(view: DatePickerDialog?, year: Int, monthOfYear: Int, dayOfMonth: Int) {
         val dat = String.format("%d%02d%02d", year, monthOfYear + 1, dayOfMonth)
-        if (view?.tag == "neraca") {
-            val data01 = DataParam(
-                tgl = dat,
-                golac = "nrc",
-                kdloc = "01"
-            )
-            val requestLapKeu = RequestLapKeu(
-                request = "lapkeu",
-                data01 = data01
-            )
-            AlertDialog.Builder(this)
-                .setTitle("Konfirmasi")
-                .setMessage("Tampilkan Laporan dalam bentuk:")
-                .setPositiveButton("Table") { d, i ->
-                    Intent(this, LaporanTableViewActivity::class.java).apply {
-                        putExtra(LaporanTableViewActivity.REQ_LAP_KEU, requestLapKeu)
-                        putExtra(LaporanTableViewActivity.URL_REQ, "report/neraca")
-                        putExtra(LaporanTableViewActivity.TITLE_REQ, "Laporan Neraca")
-                        startActivity(this)
-                    }
+        when (view?.tag) {
+            "neraca" -> {
+                val data01 = DataParam(
+                    tgl = dat,
+                    golac = "nrc",
+                    kdloc = "01"
+                )
+                val requestLapKeu = RequestLapKeu(
+                    request = "lapkeu2",
+                    data01 = data01
+                )
+                Intent(this, LaporanTableViewActivity::class.java).apply {
+                    putExtra(LaporanTableViewActivity.REQ_LAP_KEU, requestLapKeu)
+                    putExtra(LaporanTableViewActivity.URL_REQ, "report/neraca")
+                    putExtra(LaporanTableViewActivity.TITLE_REQ, "Laporan Neraca")
+                    startActivity(this)
                 }
-                .setNegativeButton("List/Daftar") { d, i ->
-                    Intent(this, LaporanDataNeracaActivity::class.java).apply {
-                        putExtra(LaporanDataNeracaActivity.REQUEST_PARAM, requestLapKeu)
-                        startActivity(this)
-                    }
-                }.create().show()
-        } else if (view?.tag == "laba-rugi") {
-            val data01 = DataParam(
-                tgl = dat,
-                golac = "lr",
-                kdloc = "01"
-            )
-            val requestLapKeu = RequestLapKeu(
-                request = "lapkeu",
-                data01 = data01
-            )
+            }
+            "laba-rugi" -> {
+                val data01 = DataParam(
+                    tgl = dat,
+                    golac = "lr",
+                    kdloc = "01"
+                )
+                val requestLapKeu = RequestLapKeu(
+                    request = "lapkeu2",
+                    data01 = data01
+                )
+                Intent(this, LaporanTableViewActivity::class.java).apply {
+                    putExtra(LaporanTableViewActivity.REQ_LAP_KEU, requestLapKeu)
+                    putExtra(LaporanTableViewActivity.URL_REQ, "report/rugi-laba")
+                    putExtra(LaporanTableViewActivity.TITLE_REQ, "Laporan Laba Rugi")
+                    startActivity(this)
+                }
 
-            AlertDialog.Builder(this)
-                .setTitle("Konfirmasi")
-                .setMessage("Tampilkan Laporan dalam bentuk:")
-                .setPositiveButton("Table") { d, i ->
-                    Intent(this, LaporanTableViewActivity::class.java).apply {
-                        putExtra(LaporanTableViewActivity.REQ_LAP_KEU, requestLapKeu)
-                        putExtra(LaporanTableViewActivity.URL_REQ, "report/rugi-laba")
-                        putExtra(LaporanTableViewActivity.TITLE_REQ, "Laporan Rugi Laba")
-                        startActivity(this)
-                    }
-                }
-                .setNegativeButton("List/Daftar") { d, i ->
-                    Intent(this, LaporanDataNeracaActivity::class.java).apply {
-                        putExtra(LaporanDataNeracaActivity.REQUEST_PARAM, requestLapKeu)
-                        startActivity(this)
-                    }
-                }.create().show()
-        } else if (view?.tag == "npf") {
-            val data01 = DataParam(
-                tgl = dat,
-                kode = "ao"
-            )
-            val requestLapKeu = RequestLapKeu(
-                request = "npf",
-                data01 = data01
-            )
+            }
+            "npf" -> {
+                val data01 = DataParam(
+                    tgl = dat,
+                    kode = "ao"
+                )
+                val requestLapKeu = RequestLapKeu(
+                    request = "npf",
+                    data01 = data01
+                )
 
-            AlertDialog.Builder(this)
-                .setTitle("Konfirmasi")
-                .setMessage("Tampilkan Laporan dalam bentuk:")
-                .setPositiveButton("Table") { d, i ->
-                    Intent(this, LaporanTableViewActivity::class.java).apply {
-                        putExtra(LaporanTableViewActivity.REQ_LAP_KEU, requestLapKeu)
-                        putExtra(LaporanTableViewActivity.URL_REQ, "report/npf")
-                        putExtra(LaporanTableViewActivity.TITLE_REQ, "Laporan NPF")
-                        startActivity(this)
-                    }
+                Intent(this, LaporanTableViewActivity::class.java).apply {
+                    putExtra(LaporanTableViewActivity.REQ_LAP_KEU, requestLapKeu)
+                    putExtra(LaporanTableViewActivity.URL_REQ, "report/npf")
+                    putExtra(LaporanTableViewActivity.TITLE_REQ, "Laporan NPF")
+                    startActivity(this)
                 }
-                .setNegativeButton("List/Daftar") { d, i ->
-                    Intent(this, LaporanDataNpfActivity::class.java).apply {
-                        putExtra(LaporanDataNeracaActivity.REQUEST_PARAM, requestLapKeu)
-                        startActivity(this)
-                    }
-                }.create().show()
+            }
         }
     }
 }

@@ -70,7 +70,7 @@
                     android:layout_margin="8dp"
                     android:drawablePadding="10dp"
                     android:gravity="center_horizontal"
-                    android:text="Data Rugi Laba"
+                    android:text="Data Laba Rugi"
                     android:textSize="17sp"
                     android:textStyle="bold"
                     app:drawableTopCompat="@drawable/ic_laba_rugi" />

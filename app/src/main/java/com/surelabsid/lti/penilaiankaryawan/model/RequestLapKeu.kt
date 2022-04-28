@@ -18,5 +18,5 @@ data class DataParam(
     var tgl2: String? = null,
     var golac: String? = null,
     var kdloc: String = "01",
-    var kode: String? = null
+    var kode: String? = "ao"
 ): Parcelable

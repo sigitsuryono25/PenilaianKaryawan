@@ -56,13 +56,7 @@ interface ApiService {
      */
 
     @POST("kirim/keuangan/get")
-    suspend fun getDataNeraca(@Body requestLapKeu: RequestLapKeu?): ResponseDataNeraca
-
-    @POST("kirim/keuangan/get")
-    suspend fun getRugiLaba(@Body requestLapKeu: RequestLapKeu?): ResponseRugiLaba
-
-    @POST("kirim/keuangan/get")
-    suspend fun getDataNpf(@Body requestLapKeu: RequestLapKeu?): ResponseDataNPF
+    suspend fun getListKantor(@Body requestLapKeu: RequestLapKeu) : ResponseListKantor
 
 
     /**

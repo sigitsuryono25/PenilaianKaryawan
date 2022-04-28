@@ -17,9 +17,76 @@
     <string name="forward">Maju</string>
     <string name="back">Kembali</string>
     <string name="open_with_chrome">Buka dengan Chrome</string>
-    <string name="pilih">Pilih</string>
     <string name="tanggal_akhir">Tanggal Akhir</string>
     <string name="pilih_tanggal"><i>-- Pilih Tanggal --</i></string>
     <string name="tanggal_awal">Tanggal Awal</string>
     <string name="pilih_tanggal_laporan"><u>Pilih Tanggal Laporan</u></string>
+
+    <string-array name="laporan_keu">
+        <item>Neraca</item>
+        <item>Laba Rugi</item>
+        <item>NPF</item>
+        <item>NOA</item>
+        <item>Angsuran</item>
+        <item>Rata-rata Saldo Harian Tabungan dan Deposito</item>
+        <item>CAR</item>
+        <item>FDR</item>
+        <item>ROA</item>
+        <item>ROE</item>
+        <item>Rentabilitas</item>
+    </string-array>
+    <string-array name="end_point">
+        <item>report/neraca</item>
+        <item>report/rugi-laba</item>
+        <item>report/npf</item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+    </string-array>
+    <string-array name="title_report">
+        <item>Laporan Neraca</item>
+        <item>Laporan Laba Rugi</item>
+        <item>Laporan NPF</item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+    </string-array>
+    <string-array name="request_data">
+        <item>lapkeu</item>
+        <item>lapkeu</item>
+        <item>npf</item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+    </string-array>
+
+    <string-array name="golac">
+        <item>nrc</item>
+        <item>lr</item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+    </string-array>
+
 </resources>

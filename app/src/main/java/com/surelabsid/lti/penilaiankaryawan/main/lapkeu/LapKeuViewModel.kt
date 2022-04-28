@@ -5,44 +5,29 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.surelabsid.lti.penilaiankaryawan.base.BaseViewModel
 import com.surelabsid.lti.penilaiankaryawan.model.RequestLapKeu
-import com.surelabsid.lti.penilaiankaryawan.response.ResponseDataNPF
-import com.surelabsid.lti.penilaiankaryawan.response.ResponseDataNeraca
+import com.surelabsid.lti.penilaiankaryawan.response.ResponseListKantor
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class LapKeuViewModel : BaseViewModel() {
 
 
-    private val _dataNeraca = MutableLiveData<ResponseDataNeraca>()
-    val dataNeraca: LiveData<ResponseDataNeraca> get() = _dataNeraca
+    private val _listKantor = MutableLiveData<ResponseListKantor>()
+    val dataKantor: LiveData<ResponseListKantor> get() = _listKantor
 
-    private val _dataNpf = MutableLiveData<ResponseDataNPF>()
-    val dataNpf: LiveData<ResponseDataNPF> get() = _dataNpf
+    val error : LiveData<Throwable> get() = _error
 
 
-    private val _dataNoa = MutableLiveData<ResponseDataNPF>()
-    val dataNoa: LiveData<ResponseDataNPF> get() = _dataNoa
-
-    val error: LiveData<Throwable> get() = _error
-
-    fun getDataNeraca(requestLapKeu: RequestLapKeu?) {
-        viewModelScope.launch {
+    fun getListKantor(requestLapKeu: RequestLapKeu) {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
-                val res = apiServiceLapKeu.getDataNeraca(requestLapKeu)
-                _dataNeraca.postValue(res)
-            } catch (e: Exception) {
+                val data = apiServiceLapKeu.getListKantor(requestLapKeu)
+                _listKantor.postValue(data)
+            } catch (e: Throwable) {
                 _error.postValue(e)
             }
         }
+
     }
 
-    fun getDataNpf(requestLapKeu: RequestLapKeu?) {
-        viewModelScope.launch {
-            try {
-                val res = apiServiceLapKeu.getDataNpf(requestLapKeu)
-                _dataNpf.postValue(res)
-            } catch (e: Exception) {
-                _error.postValue(e)
-            }
-        }
-    }
 }

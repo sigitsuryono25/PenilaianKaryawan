@@ -1,24 +1,48 @@
 package com.surelabsid.lti.penilaiankaryawan.main.lapkeu
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
+import android.widget.AdapterView
 import androidx.appcompat.app.AppCompatActivity
+import com.surelabsid.lti.penilaiankaryawan.R
 import com.surelabsid.lti.penilaiankaryawan.databinding.ActivityLapKeuBinding
-import com.surelabsid.lti.penilaiankaryawan.main.lapkeu.dialog.PickDateDialog
 import com.surelabsid.lti.penilaiankaryawan.model.DataParam
 import com.surelabsid.lti.penilaiankaryawan.model.RequestLapKeu
+import com.surelabsid.lti.penilaiankaryawan.response.DataKantorItem
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog
+import timber.log.Timber
 import java.util.*
 
 class LapKeuActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
     private lateinit var binding: ActivityLapKeuBinding
     private lateinit var now: Calendar
+    private val REQ_LOC_KANTOR = 1090
+    private var dataKantorItem: DataKantorItem? = null
+    private var title = emptyArray<String>()
+    private var endPoint = emptyArray<String>()
+    private var requestKey = emptyArray<String>()
+    private var golac = emptyArray<String>()
+    private var titleSelected = StringBuilder()
+    private var endPointSelected = StringBuilder()
+    private var requestKeySelected = StringBuilder()
+    private var golacSelected = StringBuilder()
+    private var tgl1: String? = null
+    private var tgl2: String? = null
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLapKeuBinding.inflate(layoutInflater)
         setContentView(binding.root)
         now = Calendar.getInstance()
+
+        title = resources.getStringArray(R.array.title_report)
+        endPoint = resources.getStringArray(R.array.end_point)
+        requestKey = resources.getStringArray(R.array.request_data)
+        golac = resources.getStringArray(R.array.golac)
 
         supportActionBar?.apply {
             title = "Laporan Keuangan"
@@ -32,34 +56,61 @@ class LapKeuActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
             now.get(Calendar.DAY_OF_MONTH)
         )
 
-        binding.neraca.setOnClickListener {
-            dpd.show(supportFragmentManager, "neraca")
+        binding.tgl1.setOnClickListener {
+            dpd.show(supportFragmentManager, "tgl1")
+        }
+        binding.tgl2.setOnClickListener {
+            dpd.show(supportFragmentManager, "tgl2")
         }
 
-        binding.rugiLaba.setOnClickListener {
-            dpd.show(supportFragmentManager, "laba-rugi")
+        binding.pilihKantor.setOnClickListener {
+            Intent(this@LapKeuActivity, ListKantorActivity::class.java).apply {
+                startActivityForResult(this, REQ_LOC_KANTOR)
+            }
         }
 
-        binding.npf.setOnClickListener {
-            dpd.show(supportFragmentManager, "npf")
+        binding.jenisLaporan.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                titleSelected.append(title[position])
+                endPointSelected.append(endPoint[position])
+                requestKeySelected.append(requestKey[position])
+                golacSelected.append(golac[position])
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
         }
 
-        binding.noa.setOnClickListener {
-            val pickDate = PickDateDialog.newInstance(PickDateDialog.NOA)
-            pickDate.show(supportFragmentManager, PickDateDialog.NOA)
+        binding.lihat.setOnClickListener {
+            val data01 = DataParam(
+                tgl = tgl1,
+                tgl2 = tgl2,
+                golac = golacSelected.toString(),
+                kdloc = dataKantorItem?.kdloc.toString()
+            )
+            val requestLapKeu = RequestLapKeu(
+                request = requestKeySelected.toString(),
+                data01 = data01
+            )
+            Intent(this, LaporanTableViewActivity::class.java).apply {
+                putExtra(LaporanTableViewActivity.REQ_LAP_KEU, requestLapKeu)
+                putExtra(LaporanTableViewActivity.URL_REQ, endPointSelected.toString())
+                putExtra(LaporanTableViewActivity.TITLE_REQ, titleSelected.toString())
+
+                /**
+                 * dari android cuma kirim kategori laporannya aja, baru nanti backend yang tata
+                 * data yang dikirimkan ke backend juga nama kantor/cabang untuk keperluan judul di laporan
+                 * intinya, endpoint yang ditembak cuma 1, yang berubah parameter GET yang dikirimkan aja
+                 * jangan sampe lupa apa yang udah dicatet ini ya
+                 */
+                startActivity(this)
+            }
         }
-
-        binding.angsuran.setOnClickListener {
-            val pickDate = PickDateDialog.newInstance(PickDateDialog.ANGSURAN)
-            pickDate.show(supportFragmentManager, PickDateDialog.ANGSURAN)
-        }
-
-        binding.saldoDeposit.setOnClickListener {
-            val pickDate = PickDateDialog.newInstance(PickDateDialog.RATA_SALDO_TABUNGAN_DEPOSITO)
-            pickDate.show(supportFragmentManager, PickDateDialog.RATA_SALDO_TABUNGAN_DEPOSITO)
-
-        }
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -69,60 +120,25 @@ class LapKeuActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
         return super.onOptionsItemSelected(item)
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQ_LOC_KANTOR && resultCode == Activity.RESULT_OK) {
+            dataKantorItem = data?.getParcelableExtra(ListKantorActivity.SELECTED_RESULT)
+            binding.pilihKantor.text = dataKantorItem?.nama
+            Timber.d("onActivityResult: $dataKantorItem")
+        }
+    }
+
     override fun onDateSet(view: DatePickerDialog?, year: Int, monthOfYear: Int, dayOfMonth: Int) {
         val dat = String.format("%d%02d%02d", year, monthOfYear + 1, dayOfMonth)
         when (view?.tag) {
-            "neraca" -> {
-                val data01 = DataParam(
-                    tgl = dat,
-                    golac = "nrc",
-                    kdloc = "01"
-                )
-                val requestLapKeu = RequestLapKeu(
-                    request = "lapkeu2",
-                    data01 = data01
-                )
-                Intent(this, LaporanTableViewActivity::class.java).apply {
-                    putExtra(LaporanTableViewActivity.REQ_LAP_KEU, requestLapKeu)
-                    putExtra(LaporanTableViewActivity.URL_REQ, "report/neraca")
-                    putExtra(LaporanTableViewActivity.TITLE_REQ, "Laporan Neraca")
-                    startActivity(this)
-                }
+            "tgl1" -> {
+                binding.tgl1.text = dat
+                tgl1 = dat
             }
-            "laba-rugi" -> {
-                val data01 = DataParam(
-                    tgl = dat,
-                    golac = "lr",
-                    kdloc = "01"
-                )
-                val requestLapKeu = RequestLapKeu(
-                    request = "lapkeu2",
-                    data01 = data01
-                )
-                Intent(this, LaporanTableViewActivity::class.java).apply {
-                    putExtra(LaporanTableViewActivity.REQ_LAP_KEU, requestLapKeu)
-                    putExtra(LaporanTableViewActivity.URL_REQ, "report/rugi-laba")
-                    putExtra(LaporanTableViewActivity.TITLE_REQ, "Laporan Laba Rugi")
-                    startActivity(this)
-                }
-
-            }
-            "npf" -> {
-                val data01 = DataParam(
-                    tgl = dat,
-                    kode = "ao"
-                )
-                val requestLapKeu = RequestLapKeu(
-                    request = "npf",
-                    data01 = data01
-                )
-
-                Intent(this, LaporanTableViewActivity::class.java).apply {
-                    putExtra(LaporanTableViewActivity.REQ_LAP_KEU, requestLapKeu)
-                    putExtra(LaporanTableViewActivity.URL_REQ, "report/npf")
-                    putExtra(LaporanTableViewActivity.TITLE_REQ, "Laporan NPF")
-                    startActivity(this)
-                }
+            "tgl2" -> {
+                binding.tgl2.text = dat
+                tgl2 = dat
             }
         }
     }

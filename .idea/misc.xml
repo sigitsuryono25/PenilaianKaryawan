@@ -46,6 +46,7 @@
         <entry key="app/src/main/res/layout/activity_laporan_data_neraca.xml" value="0.31979166666666664" />
         <entry key="app/src/main/res/layout/activity_laporan_data_npf.xml" value="0.31979166666666664" />
         <entry key="app/src/main/res/layout/activity_laporan_table_view.xml" value="0.31979166666666664" />
+        <entry key="app/src/main/res/layout/activity_list_kantor.xml" value="0.31979166666666664" />
         <entry key="app/src/main/res/layout/activity_monitoring.xml" value="0.1484375" />
         <entry key="app/src/main/res/layout/activity_penilaian.xml" value="0.1484375" />
         <entry key="app/src/main/res/layout/activity_test.xml" value="0.31979166666666664" />
@@ -55,6 +56,7 @@
         <entry key="app/src/main/res/layout/fragment_penilaian_karyawan.xml" value="0.1640625" />
         <entry key="app/src/main/res/layout/fragment_pick_date_dialog.xml" value="0.31979166666666664" />
         <entry key="app/src/main/res/layout/item_adapter_daftar_penilaian.xml" value="0.18854166666666666" />
+        <entry key="app/src/main/res/layout/item_adapter_list_kantor.xml" value="0.31979166666666664" />
         <entry key="app/src/main/res/layout/item_adapter_neraca.xml" value="0.31979166666666664" />
         <entry key="app/src/main/res/layout/item_adapter_npf.xml" value="0.31979166666666664" />
         <entry key="app/src/main/res/menu/search_menu.xml" value="0.31979166666666664" />

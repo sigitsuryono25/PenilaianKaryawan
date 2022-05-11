@@ -15,8 +15,7 @@
 <body>
     <div class="container">
         <div class="table-reponsive">
-            <h5 class="font-weight-bold text-center mb-4">KANTOR PUSAT<br>
-                <small>Jl. Pemuda Barat No. 02 Pucungrejo</small>
+            <h5 class="font-weight-bold text-center mb-4"><?= $kantor?>
             </h5>
             <h5 class="text-center">Laporan Neraca<br>per <?= $tanggal ?></h5>
             <div class="table-responsive">

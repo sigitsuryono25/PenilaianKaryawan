@@ -109,9 +109,16 @@ $route['rules/action-delete'] = "Rules/deleteRules";
 $route['rules/action-update'] = "Rules/updateRules";
 $route['rules/form-edit'] = "Rules/formEdit";
 
+$route['report/get'] = "Report/getReport";
+
 $route['report/neraca'] = "Report/index";
 $route['report/npf'] = "Report/npf";
 $route['report/rugi-laba'] = "Report/rugiLaba";
+$route['report/car'] = "Report/car";
+$route['report/fdr'] = "Report/fdr";
+$route['report/roa'] = "Report/roa";
+$route['report/roe'] = "Report/roe";
+$route['report/rentabilitas'] = "Report/rentabilitas";
 
 
 //settings

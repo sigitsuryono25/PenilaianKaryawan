@@ -136,7 +136,7 @@ $autoload['model'] = array(
 	'M_user' => 'user',
 	'M_bidang' => 'bidang',
 	'M_crud' => 'crud',
-	'M_Jabatan' => 'jabatan',
+	'M_jabatan' => 'jabatan',
 	'M_pengumuman' => 'pengumuman',
 	'Etc' => 'etc'
 );

@@ -9,14 +9,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
-    <title>Laporan Neraca</title>
+    <title>Laporan Laba Rugi</title>
 </head>
 
 <body style="font-size: 11px;">
     <div class="container">
         <div class="table-reponsive">
-            <h5 class="font-weight-bold text-center mb-4">KANTOR PUSAT<br>
-                <small>Jl. Pemuda Barat No. 02 Pucungrejo</small>
+            <h5 class="font-weight-bold text-center mb-4"><?= $kantor?>
             </h5>
             <h5 class="text-center">Laporan Laba Rugi<br>per <?= $tanggal ?></h5>
             <ul class="nav nav-tabs" id="myTab" role="tablist">

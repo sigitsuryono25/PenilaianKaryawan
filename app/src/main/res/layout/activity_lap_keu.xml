@@ -127,6 +127,7 @@
                     <TextView
                         android:id="@+id/tgl2"
                         android:layout_width="0dp"
+                        android:visibility="gone"
                         android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:layout_marginHorizontal="8dp"

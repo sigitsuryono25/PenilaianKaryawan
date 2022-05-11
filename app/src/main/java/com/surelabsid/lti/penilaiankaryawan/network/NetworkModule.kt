@@ -6,7 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object NetworkModule {
-    const val DEBUG_URL = "http://192.168.1.6/webproject/PenilaianKaryawanBMT/index.php/"
+    const val DEBUG_URL = "http://192.168.1.105/PenilaianKaryawanBMT/"
     const val BASE_URL = "http://bmt-bima.server4111.com/"
     const val BASE_URL_LTI = "https://lauwba.com/webservices/"
 

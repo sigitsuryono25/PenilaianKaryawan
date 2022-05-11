@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.MenuItem
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
@@ -35,21 +36,28 @@ class LaporanTableViewActivity : AppCompatActivity() {
         }
 
         val requestData = intent.getParcelableExtra<RequestLapKeu>(REQ_LAP_KEU)
+
+//        Log.d("onCreate", "onCreate: $requestData")
         val url = intent.getStringExtra(URL_REQ)
         val title = intent.getStringExtra(TITLE_REQ)
+        val kantor = intent.getStringExtra(KANTOR)
+
+//        Toast.makeText(this, url, Toast.LENGTH_SHORT).show()
+
 
         supportActionBar?.apply {
             setTitle(title)
             setDisplayHomeAsUpEnabled(true)
         }
+
         pd.show()
         if (requestData != null) {
             val headers = hashMapOf<String, String>()
             headers.put("Device-Terminal", "d3nMas")
             val gson = Gson()
             val param = gson.toJson(requestData)
-            val postData = "q=" + URLEncoder.encode(param)
-            binding.wv.postUrl("${NetworkModule.BASE_URL}index.php/$url", postData.toByteArray())
+            val postData = "q=" + URLEncoder.encode(param) + "&type=$url&kantor=$kantor"
+            binding.wv.postUrl("${NetworkModule.DEBUG_URL}index.php/report/get", postData.toByteArray())
         } else {
             pd.dismiss()
             AlertDialog.Builder(this)
@@ -73,5 +81,6 @@ class LaporanTableViewActivity : AppCompatActivity() {
         const val REQ_LAP_KEU = "request"
         const val URL_REQ = "urlReq"
         const val TITLE_REQ = "titles"
+        const val KANTOR = "kantor"
     }
 }

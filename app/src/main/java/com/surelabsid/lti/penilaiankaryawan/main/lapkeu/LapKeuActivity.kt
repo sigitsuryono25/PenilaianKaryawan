@@ -25,11 +25,12 @@ class LapKeuActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
     private var endPoint = emptyArray<String>()
     private var requestKey = emptyArray<String>()
     private var golac = emptyArray<String>()
-    private var titleSelected = StringBuilder()
-    private var endPointSelected = StringBuilder()
-    private var requestKeySelected = StringBuilder()
-    private var golacSelected = StringBuilder()
+    private var titleSelected: String? = null
+    private var endPointSelected: String? = null
+    private var requestKeySelected: String? = null
+    private var golacSelected: String? = null
     private var tgl1: String? = null
+    private var kantor: String? = null
     private var tgl2: String? = null
 
 
@@ -76,10 +77,16 @@ class LapKeuActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
                 position: Int,
                 id: Long
             ) {
-                titleSelected.append(title[position])
-                endPointSelected.append(endPoint[position])
-                requestKeySelected.append(requestKey[position])
-                golacSelected.append(golac[position])
+                if (position == 3 || position == 4 || position == 5) {
+                    binding.tgl2.visibility = View.VISIBLE
+                } else {
+                    binding.tgl2.visibility = View.GONE
+                    tgl2 = ""
+                }
+                titleSelected = title[position]
+                endPointSelected = endPoint[position]
+                requestKeySelected = requestKey[position]
+                golacSelected = golac[position]
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -89,6 +96,7 @@ class LapKeuActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
         binding.lihat.setOnClickListener {
             val data01 = DataParam(
                 tgl = tgl1,
+                tgl1 = tgl1,
                 tgl2 = tgl2,
                 golac = golacSelected.toString(),
                 kdloc = dataKantorItem?.kdloc.toString()
@@ -101,6 +109,7 @@ class LapKeuActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
                 putExtra(LaporanTableViewActivity.REQ_LAP_KEU, requestLapKeu)
                 putExtra(LaporanTableViewActivity.URL_REQ, endPointSelected.toString())
                 putExtra(LaporanTableViewActivity.TITLE_REQ, titleSelected.toString())
+                putExtra(LaporanTableViewActivity.KANTOR, binding.pilihKantor.text.toString())
 
                 /**
                  * dari android cuma kirim kategori laporannya aja, baru nanti backend yang tata
@@ -130,13 +139,15 @@ class LapKeuActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
     }
 
     override fun onDateSet(view: DatePickerDialog?, year: Int, monthOfYear: Int, dayOfMonth: Int) {
-        val dat = String.format("%d%02d%02d", year, monthOfYear + 1, dayOfMonth)
+
         when (view?.tag) {
             "tgl1" -> {
+                val dat = String.format("%d%02d%02d", year, monthOfYear + 1, dayOfMonth)
                 binding.tgl1.text = dat
                 tgl1 = dat
             }
             "tgl2" -> {
+                val dat = String.format("%d%02d%02d", year, monthOfYear + 1, dayOfMonth)
                 binding.tgl2.text = dat
                 tgl2 = dat
             }

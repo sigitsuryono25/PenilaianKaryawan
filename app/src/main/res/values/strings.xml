@@ -36,43 +36,43 @@
         <item>Rentabilitas</item>
     </string-array>
     <string-array name="end_point">
-        <item>report/neraca</item>
-        <item>report/rugi-laba</item>
-        <item>report/npf</item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
+        <item>neraca</item>
+        <item>rugi-laba</item>
+        <item>npf</item>
+        <item>noa</item>
+        <item>angsuran</item>
+        <item>saldo-tabungan</item>
+        <item>car</item>
+        <item>fdr</item>
+        <item>roa</item>
+        <item>roe</item>
+        <item>rentabilitas</item>
     </string-array>
     <string-array name="title_report">
         <item>Laporan Neraca</item>
         <item>Laporan Laba Rugi</item>
         <item>Laporan NPF</item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
+        <item>Laporan NOA</item>
+        <item>Laporan Angsuran</item>
+        <item>Laporan Saldo Tabungan</item>
+        <item>Laporan CAR</item>
+        <item>Laporan FDR</item>
+        <item>Laporan ROA</item>
+        <item>Laporan ROE</item>
+        <item>Laporan Rentabilitas</item>
     </string-array>
     <string-array name="request_data">
-        <item>lapkeu</item>
-        <item>lapkeu</item>
+        <item>lapkeu2</item>
+        <item>lapkeu2</item>
         <item>npf</item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
+        <item>noa</item>
+        <item>angs</item>
+        <item>saldo</item>
+        <item>rasio</item>
+        <item>rasio</item>
+        <item>rasio</item>
+        <item>rasio</item>
+        <item>rasio</item>
     </string-array>
 
     <string-array name="golac">

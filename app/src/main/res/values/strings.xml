@@ -1,0 +1,92 @@
+<resources>
+    <string name="app_name">Penilaian Karyawan</string>
+    <string name="user_id">ID User</string>
+    <string name="password">Password</string>
+    <string name="selamat_datang_di_aplikasi_penilaian_karyawan_nbmt_bima_magelang">Selamat Datang di Aplikasi Penilaian Karyawan\n<font color="#E64A19">BMT BIMA Magelang</font></string>
+    <string name="masuk">Masuk</string>
+    <string name="mengirimkan_data">Megirimkan data..</string>
+    <string name="home">Home</string>
+    <string name="akun">Akun</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="monitoring">Monitoring</string>
+    <string name="pengumuman">Pengumuman</string>
+    <string name="selengkapnya">Selengkapnya</string>
+    <string name="pkp">PKP</string>
+    <string name="logout">Logout</string>
+    <string name="forward">Maju</string>
+    <string name="back">Kembali</string>
+    <string name="open_with_chrome">Buka dengan Chrome</string>
+    <string name="tanggal_akhir">Tanggal Akhir</string>
+    <string name="pilih_tanggal"><i>-- Pilih Tanggal --</i></string>
+    <string name="tanggal_awal">Tanggal Awal</string>
+    <string name="pilih_tanggal_laporan"><u>Pilih Tanggal Laporan</u></string>
+
+    <string-array name="laporan_keu">
+        <item>Neraca</item>
+        <item>Laba Rugi</item>
+        <item>NPF</item>
+        <item>NOA</item>
+        <item>Angsuran</item>
+        <item>Rata-rata Saldo Harian Tabungan dan Deposito</item>
+        <item>CAR</item>
+        <item>FDR</item>
+        <item>ROA</item>
+        <item>ROE</item>
+        <item>Rentabilitas</item>
+    </string-array>
+    <string-array name="end_point">
+        <item>neraca</item>
+        <item>rugi-laba</item>
+        <item>npf</item>
+        <item>noa</item>
+        <item>angsuran</item>
+        <item>saldo-tabungan</item>
+        <item>car</item>
+        <item>fdr</item>
+        <item>roa</item>
+        <item>roe</item>
+        <item>rentabilitas</item>
+    </string-array>
+    <string-array name="title_report">
+        <item>Laporan Neraca</item>
+        <item>Laporan Laba Rugi</item>
+        <item>Laporan NPF</item>
+        <item>Laporan NOA</item>
+        <item>Laporan Angsuran</item>
+        <item>Laporan Saldo Tabungan</item>
+        <item>Laporan CAR</item>
+        <item>Laporan FDR</item>
+        <item>Laporan ROA</item>
+        <item>Laporan ROE</item>
+        <item>Laporan Rentabilitas</item>
+    </string-array>
+    <string-array name="request_data">
+        <item>lapkeu2</item>
+        <item>lapkeu2</item>
+        <item>npf</item>
+        <item>noa</item>
+        <item>angs</item>
+        <item>saldo</item>
+        <item>rasio</item>
+        <item>rasio</item>
+        <item>rasio</item>
+        <item>rasio</item>
+        <item>rasio</item>
+    </string-array>
+
+    <string-array name="golac">
+        <item>nrc</item>
+        <item>lr</item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+    </string-array>
+
+</resources>

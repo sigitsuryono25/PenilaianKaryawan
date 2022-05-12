@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.surelabsid.lti.penilaiankaryawan">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:name=".App"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.PenilaianKaryawan"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".main.lapkeu.ListKantorActivity"
+            android:exported="false" />
+        <activity
+            android:name=".main.lapkeu.LaporanTableViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".main.lapkeu.adapter.LaporanDataNoaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".main.lapkeu.LaporanDataNpfActivity"
+            android:exported="false" />
+        <activity
+            android:name=".main.lapkeu.LaporanDataNeracaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".main.lapkeu.LapKeuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".WebViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".main.monitoring.PenilaianActivity"
+            android:exported="false" />
+
+        <service
+            android:name=".service.MyFCMService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/logo" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/blue_200" />
+
+        <activity
+            android:name=".main.pengumuman.AllPengumumanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".main.pengumuman.DetailPengumumanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".main.monitoring.DetailPenilaianActivity"
+            android:exported="false" />
+        <activity
+            android:name=".main.test.TestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".main.pkp.DaftarKaryawanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".main.pkp.PkpActivity"
+            android:exported="true" />
+        <activity
+            android:name=".login.LoginActivity"
+            android:exported="true"
+            android:theme="@style/Theme.PenilaianKaryawan.NoActionBar" />
+        <activity
+            android:name=".SplashScreenActivity"
+            android:exported="true"
+            android:theme="@style/Theme.PenilaianKaryawan.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true" />
+    </application>
+
+</manifest>

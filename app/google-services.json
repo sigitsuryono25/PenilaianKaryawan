@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1023622886433",
+    "project_id": "ksppsbmtbima-57b98",
+    "storage_bucket": "ksppsbmtbima-57b98.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1023622886433:android:991e8784b0b6720ad2df60",
+        "android_client_info": {
+          "package_name": "com.surelabsid.lti.penilaiankaryawan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1023622886433-397h4g0vd2konhesm2l14d0s0plaqpn1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.surelabsid.lti.penilaiankaryawan",
+            "certificate_hash": "ac913b89e9ca2474246deca362dc5af1a91c8dbf"
+          }
+        },
+        {
+          "client_id": "1023622886433-2a1pg2qc4shd3q0p2oqsi8bfksnc7rg5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANvd2MdRucGbDVWJCObS2lVVCb5sUKdoE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1023622886433-2a1pg2qc4shd3q0p2oqsi8bfksnc7rg5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

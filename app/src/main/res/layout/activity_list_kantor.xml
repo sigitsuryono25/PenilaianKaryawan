@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".main.lapkeu.LapKeuActivity">
+
+
+    <ImageView
+        android:id="@+id/cover"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_marginTop="-100dp"
+        android:alpha="0.5"
+        android:contentDescription="@string/app_name"
+        android:rotation="-30"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_profile" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listKantor"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</RelativeLayout>

@@ -1,9 +1,7 @@
 package com.surelabsid.lti.penilaiankaryawan.main.lapkeu
 
 import android.app.ProgressDialog
-import android.content.res.AssetManager
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
@@ -70,7 +68,6 @@ class LaporanTableViewActivity : AppCompatActivity() {
             val postData = "q=" + URLEncoder.encode(param) + "&type=$url&kantor=$kantor"
             binding.wv.postUrl("${NetworkModule.BASE_URL}index.php/report/get", postData.toByteArray())
 
-            Log.d("URL", "${NetworkModule.BASE_URL}index.php/report/get")
         } else {
             pd.dismiss()
             AlertDialog.Builder(this)

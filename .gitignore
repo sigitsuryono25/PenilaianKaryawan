@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 0b8e0a1df552672d8d8b04ad79bc55dbdcc1f462
 *.iml
 .gradle
 /local.properties
@@ -14,6 +17,7 @@
 .externalNativeBuild
 .cxx
 local.properties
+<<<<<<< HEAD
 =======
 .DS_Store
 
@@ -47,3 +51,5 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 /tests/tests/
 /tests/results/
 >>>>>>> 4c7aa96d2d6bd61870354cc06533079704a06970
+=======
+>>>>>>> 0b8e0a1df552672d8d8b04ad79bc55dbdcc1f462

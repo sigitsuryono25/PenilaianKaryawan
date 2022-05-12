@@ -6,7 +6,10 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
+<<<<<<< HEAD
 import android.widget.Toast
+=======
+>>>>>>> 0b8e0a1df552672d8d8b04ad79bc55dbdcc1f462
 import androidx.appcompat.app.AppCompatActivity
 import com.surelabsid.lti.penilaiankaryawan.R
 import com.surelabsid.lti.penilaiankaryawan.databinding.ActivityLapKeuBinding
@@ -95,10 +98,13 @@ class LapKeuActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
         }
 
         binding.lihat.setOnClickListener {
+<<<<<<< HEAD
             if(binding.tgl2.visibility == View.VISIBLE && tgl2?.isEmpty() == true){
                 Toast.makeText(this@LapKeuActivity, "Tanggal Akhir harus Dipilih", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+=======
+>>>>>>> 0b8e0a1df552672d8d8b04ad79bc55dbdcc1f462
             val data01 = DataParam(
                 tgl = tgl1,
                 tgl1 = tgl1,

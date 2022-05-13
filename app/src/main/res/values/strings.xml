@@ -22,6 +22,16 @@
     <string name="tanggal_awal">Tanggal Awal</string>
     <string name="pilih_tanggal_laporan"><u>Pilih Tanggal Laporan</u></string>
 
+    <string-array name="jenis">
+        <item>Kantor</item>
+        <item>Perorangan</item>
+    </string-array>
+
+    <string-array name="jenis_val">
+        <item>lokas</item>
+        <item>ao</item>
+    </string-array>
+
     <string-array name="laporan_keu">
         <item>Neraca</item>
         <item>Laba Rugi</item>

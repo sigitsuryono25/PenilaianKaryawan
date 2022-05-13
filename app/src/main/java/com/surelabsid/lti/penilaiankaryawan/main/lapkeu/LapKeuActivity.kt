@@ -26,13 +26,14 @@ class LapKeuActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
     private var endPoint = emptyArray<String>()
     private var requestKey = emptyArray<String>()
     private var golac = emptyArray<String>()
+    private var jenisVal = emptyArray<String>()
     private var titleSelected: String? = null
     private var endPointSelected: String? = null
     private var requestKeySelected: String? = null
     private var golacSelected: String? = null
     private var tgl1: String? = null
-    private var kantor: String? = null
     private var tgl2: String? = null
+    private var jenisLap: String? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,6 +46,7 @@ class LapKeuActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
         endPoint = resources.getStringArray(R.array.end_point)
         requestKey = resources.getStringArray(R.array.request_data)
         golac = resources.getStringArray(R.array.golac)
+        jenisVal = resources.getStringArray(R.array.jenis_val)
 
         supportActionBar?.apply {
             title = "Laporan Keuangan"
@@ -71,6 +73,21 @@ class LapKeuActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
             }
         }
 
+        binding.jnsLap.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                jenisLap = jenisVal.get(position)
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+        }
+
         binding.jenisLaporan.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
@@ -84,6 +101,14 @@ class LapKeuActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
                     binding.tgl2.visibility = View.GONE
                     tgl2 = ""
                 }
+                if (position == 2 || position == 3 || position == 4 || position == 5) {
+                    binding.jnsLapContainer.visibility = View.VISIBLE
+                    binding.kantorContainer.visibility = View.GONE
+                } else {
+                    binding.jnsLapContainer.visibility = View.GONE
+                    binding.kantorContainer.visibility = View.VISIBLE
+                    jenisLap = "ao"
+                }
                 titleSelected = title[position]
                 endPointSelected = endPoint[position]
                 requestKeySelected = requestKey[position]
@@ -95,8 +120,12 @@ class LapKeuActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
         }
 
         binding.lihat.setOnClickListener {
-            if(binding.tgl2.visibility == View.VISIBLE && tgl2?.isEmpty() == true){
-                Toast.makeText(this@LapKeuActivity, "Tanggal Akhir harus Dipilih", Toast.LENGTH_SHORT).show()
+            if (binding.tgl2.visibility == View.VISIBLE && tgl2?.isEmpty() == true) {
+                Toast.makeText(
+                    this@LapKeuActivity,
+                    "Tanggal Akhir harus Dipilih",
+                    Toast.LENGTH_SHORT
+                ).show()
                 return@setOnClickListener
             }
             val data01 = DataParam(
@@ -104,7 +133,8 @@ class LapKeuActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
                 tgl1 = tgl1,
                 tgl2 = tgl2,
                 golac = golacSelected.toString(),
-                kdloc = dataKantorItem?.kdloc.toString()
+                kdloc = dataKantorItem?.kdloc.toString(),
+                kode = jenisLap
             )
             val requestLapKeu = RequestLapKeu(
                 request = requestKeySelected.toString(),

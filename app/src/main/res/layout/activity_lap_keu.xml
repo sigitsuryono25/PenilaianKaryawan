@@ -48,7 +48,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Jenis Laporan Keuangan"
+                    android:text="Laporan Keuangan"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
                 <Spinner
@@ -63,6 +63,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/kantorContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp">
@@ -85,6 +86,37 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="-- Pilih Lokasi/Kantor --" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:visibility="gone"
+            android:id="@+id/jnsLapContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Jenis Laporan"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+                <Spinner
+                    android:id="@+id/jnsLap"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:entries="@array/jenis"
+                    android:spinnerMode="dialog" />
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
@@ -127,12 +159,12 @@
                     <TextView
                         android:id="@+id/tgl2"
                         android:layout_width="0dp"
-                        android:visibility="gone"
                         android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:layout_marginHorizontal="8dp"
                         android:gravity="center_horizontal"
-                        android:text="-- Tanggal Akhir --" />
+                        android:text="-- Tanggal Akhir --"
+                        android:visibility="gone" />
 
                 </GridLayout>
             </LinearLayout>

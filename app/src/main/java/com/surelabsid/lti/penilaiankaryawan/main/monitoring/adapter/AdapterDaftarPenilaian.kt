@@ -21,7 +21,7 @@ class AdapterDaftarPenilaian(private val onClick: (DataPenilaianItem?) -> Unit) 
             var total = 0.0
             val penilaianItem = responsePenilaianItem?.penilaian
             penilaianItem?.forEach {
-                total = total.plus(it?.nilaiAkhirPerPoint?.replace(",", ".")?.toDouble()!!)
+                total = total.plus(it?.nilaiAKhirPerPoint?.replace(",", ".")?.toDouble()!!)
 //                Log.d("onBindItem", "onBindItem: ${it?.nilaiAkhirPerPoint}")
             }
 

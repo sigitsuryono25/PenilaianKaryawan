@@ -23,14 +23,14 @@ data class PenilaianItem(
 	@field:SerializedName("idBidang")
 	val idBidang: String? = null,
 
+	@field:SerializedName("nilaiAKhirPerPoint")
+	val nilaiAKhirPerPoint: String? = null,
+
 	@field:SerializedName("bobotPoint")
 	val bobotPoint: String? = null,
 
-	@field:SerializedName("nilaiAkhirPerPoint")
-	val nilaiAkhirPerPoint: String? = null,
-
-	@field:SerializedName("nilaiDanPoint")
-	val nilaiDanPoint: List<NilaiDanPointItem?>? = null
+	@field:SerializedName("pairNilaiXidPoint")
+	val pairNilaiXidPoint: List<PairNilaiXidPointItem?>? = null
 ) : Parcelable
 
 @Parcelize
@@ -59,7 +59,7 @@ data class DataPenilaianItem(
 ) : Parcelable
 
 @Parcelize
-data class NilaiDanPointItem(
+data class PairNilaiXidPointItem(
 
 	@field:SerializedName("nilai")
 	val nilai: Double? = null,
@@ -68,5 +68,5 @@ data class NilaiDanPointItem(
 	val idPoint: String? = null,
 
 	@field:SerializedName("giveScore")
-	val giveScore: Double? = null
+	val giveScore: Int? = null
 ) : Parcelable

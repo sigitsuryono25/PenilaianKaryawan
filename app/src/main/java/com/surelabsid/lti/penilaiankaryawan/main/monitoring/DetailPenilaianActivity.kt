@@ -127,7 +127,7 @@ class DetailPenilaianActivity : AppCompatActivity() {
                 it?.idBidang == dataParam?.get(initIndex)?.idBidang
             }
 
-            val nilai = filterIdBidang?.get(0)?.nilaiDanPoint?.filter {
+            val nilai = filterIdBidang?.get(0)?.pairNilaiXidPoint?.filter {
                 it?.idPoint == d?.idPoint
             }
 

@@ -6,14 +6,12 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object NetworkModule {
-    const val DEBUG_URL = "http://192.168.1.105/PenilaianKaryawanBMT/"
+    //ganti alamat ini ke alamat/domain dimana bagian admin berada
     const val BASE_URL = "http://bmt-bima.server4111.com/"
-    const val BASE_URL_LTI = "https://lauwba.com/webservices/"
 
+    //ini base URL yang dipakai untuk laporan keuangan
     const val BASEURLLAPORAN = "http://202.43.164.234:12310/"
 
-
-    const val FIREBASE_URL = "https://fcm.googleapis.com/"
 
     private fun getOkHttp(): OkHttpClient {
         val logging = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC)
@@ -51,30 +49,6 @@ object NetworkModule {
             .addConverterFactory(GsonConverterFactory.create())
             .client(getOkHttpLapKeu())
             .build()
-    }
-
-    private fun getRetrofitFCM(): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl(FIREBASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(getOkHttp())
-            .build()
-    }
-
-    private fun getRetrofitLTI(): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl(BASE_URL_LTI)
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(getOkHttp())
-            .build()
-    }
-
-    fun getFcmService(): ApiService {
-        return getRetrofitFCM().create(ApiService::class.java)
-    }
-
-    fun getFcmServiceLTI(): ApiService {
-        return getRetrofitLTI().create(ApiService::class.java)
     }
 
     fun getServiceLapKeu(): ApiService {

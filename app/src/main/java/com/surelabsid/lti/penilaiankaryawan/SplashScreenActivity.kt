@@ -7,6 +7,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.window.SplashScreenView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.ktx.app
@@ -16,6 +17,7 @@ import com.surelabsid.lti.penilaiankaryawan.login.LoginActivity
 import com.surelabsid.lti.penilaiankaryawan.network.NetworkModule
 import com.surelabsid.lti.penilaiankaryawan.utils.Constant
 import kotlinx.coroutines.*
+import timber.log.Timber
 import java.lang.Exception
 
 @SuppressLint("CustomSplashScreen")
@@ -31,22 +33,39 @@ class SplashScreenActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash_screen)
 
         FirebaseMessaging.getInstance().subscribeToTopic("pengumuman").addOnSuccessListener {
-            Log.d(SplashScreenActivity::class.java.simpleName, "onCreate: success to subscribe topic")
+            Timber
+                .tag(SplashScreenActivity::class.java.simpleName)
+                .d("onCreate: success to subscribe topic")
         }
 
+        startJob()
+    }
 
+    private fun startJob() {
         job = CoroutineScope(Dispatchers.IO).launch {
             try {
                 val settings = NetworkModule.getService().getSettings()
                 delay(3000)
                 MainScope().launch {
-                    if(settings.code == 200){
+                    if (settings.code == 200) {
                         Prefs.putString(Constant.URL_PRESENSI, settings.settings?.endPointPresensi)
                         checkSession()
                     }
                 }
-            }catch (e: Throwable){
+            } catch (e: Throwable) {
                 e.printStackTrace()
+                MainScope().launch {
+                    AlertDialog.Builder(this@SplashScreenActivity)
+                        .setMessage(e.message)
+                        .setTitle("Kesalahan")
+                        .setPositiveButton("Coba lagi") { _, _ ->
+                            startJob()
+                        }
+                        .setNegativeButton("Tutup") { _, _ ->
+                            finishAffinity()
+                        }
+                        .create().show()
+                }
             }
         }
     }

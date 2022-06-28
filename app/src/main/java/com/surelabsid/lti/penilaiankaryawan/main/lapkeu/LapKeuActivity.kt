@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.surelabsid.lti.penilaiankaryawan.R
 import com.surelabsid.lti.penilaiankaryawan.databinding.ActivityLapKeuBinding
@@ -20,7 +21,6 @@ import java.util.*
 class LapKeuActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
     private lateinit var binding: ActivityLapKeuBinding
     private lateinit var now: Calendar
-    private val REQ_LOC_KANTOR = 1090
     private var dataKantorItem: DataKantorItem? = null
     private var title = emptyArray<String>()
     private var endPoint = emptyArray<String>()
@@ -34,6 +34,13 @@ class LapKeuActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
     private var tgl1: String? = null
     private var tgl2: String? = null
     private var jenisLap: String? = null
+    private var getKantor =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == Activity.RESULT_OK) {
+                dataKantorItem = it?.data?.getParcelableExtra(ListKantorActivity.SELECTED_RESULT)
+                binding.pilihKantor.text = dataKantorItem?.nama
+            }
+        }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,7 +76,7 @@ class LapKeuActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
         binding.pilihKantor.setOnClickListener {
             Intent(this@LapKeuActivity, ListKantorActivity::class.java).apply {
-                startActivityForResult(this, REQ_LOC_KANTOR)
+                getKantor.launch(this)
             }
         }
 
@@ -145,13 +152,6 @@ class LapKeuActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
                 putExtra(LaporanTableViewActivity.URL_REQ, endPointSelected.toString())
                 putExtra(LaporanTableViewActivity.TITLE_REQ, titleSelected.toString())
                 putExtra(LaporanTableViewActivity.KANTOR, binding.pilihKantor.text.toString())
-
-                /**
-                 * dari android cuma kirim kategori laporannya aja, baru nanti backend yang tata
-                 * data yang dikirimkan ke backend juga nama kantor/cabang untuk keperluan judul di laporan
-                 * intinya, endpoint yang ditembak cuma 1, yang berubah parameter GET yang dikirimkan aja
-                 * jangan sampe lupa apa yang udah dicatet ini ya
-                 */
                 startActivity(this)
             }
         }
@@ -162,15 +162,6 @@ class LapKeuActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
             android.R.id.home -> finish()
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQ_LOC_KANTOR && resultCode == Activity.RESULT_OK) {
-            dataKantorItem = data?.getParcelableExtra(ListKantorActivity.SELECTED_RESULT)
-            binding.pilihKantor.text = dataKantorItem?.nama
-            Timber.d("onActivityResult: $dataKantorItem")
-        }
     }
 
     override fun onDateSet(view: DatePickerDialog?, year: Int, monthOfYear: Int, dayOfMonth: Int) {

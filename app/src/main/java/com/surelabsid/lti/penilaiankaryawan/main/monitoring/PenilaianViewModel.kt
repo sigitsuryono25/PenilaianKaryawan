@@ -14,10 +14,10 @@ class PenilaianViewModel: BaseViewModel() {
 
     val error: LiveData<Throwable> get() =  _error
 
-    fun getPenilaian(dinilaiOleh: String?){
+    fun getPenilaian(dinilaiOleh: String?, year: Int){
         viewModelScope.launch {
             try {
-                val data = apiService.getPenilaian(dinilaiOleh)
+                val data = apiService.getPenilaian(dinilaiOleh, year)
                 _data.postValue(data)
             }catch(e: Throwable){
                 _error.postValue(e)
@@ -26,10 +26,10 @@ class PenilaianViewModel: BaseViewModel() {
         }
     }
 
-    fun getPenilaianByUser(idKaryawan: String?){
+    fun getPenilaianByUser(idKaryawan: String?, year: Int){
         viewModelScope.launch {
             try {
-                val data = apiService.getPenilaianByUser(idKaryawan)
+                val data = apiService.getPenilaianByUser(idKaryawan, year)
                 _data.postValue(data)
             }catch(e: Throwable){
                 _error.postValue(e)

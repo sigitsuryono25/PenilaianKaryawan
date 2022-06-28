@@ -68,5 +68,5 @@ data class PairNilaiXidPointItem(
 	val idPoint: String? = null,
 
 	@field:SerializedName("giveScore")
-	val giveScore: Int? = null
+	val giveScore: Double? = null
 ) : Parcelable

@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.surelabsid.lti.penilaiankaryawan.base.BaseViewModel
 import com.surelabsid.lti.penilaiankaryawan.response.ResponsePengumuman
-import com.surelabsid.lti.penilaiankaryawan.response.ResponsePengumumanDummy
 import kotlinx.coroutines.launch
 
 class PengumumanViewModel : BaseViewModel() {

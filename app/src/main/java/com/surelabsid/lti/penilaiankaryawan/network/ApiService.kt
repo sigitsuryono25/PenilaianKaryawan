@@ -32,10 +32,10 @@ interface ApiService {
 
 
     @GET("api/penilaian/get-penilaian")
-    suspend fun getPenilaian(@Query("dinilai_oleh") dinilaiOleh: String?): ResponsePenilaian
+    suspend fun getPenilaian(@Query("dinilai_oleh") dinilaiOleh: String?, @Query("tahun") tahun: Int): ResponsePenilaian
 
     @GET("api/penilaian/get-penilaian-by-user")
-    suspend fun getPenilaianByUser(@Query("id_karyawan") idKaryawan: String?): ResponsePenilaian
+    suspend fun getPenilaianByUser(@Query("id_karyawan") idKaryawan: String?, @Query("tahun") tahun: Int): ResponsePenilaian
 
     @GET("api/pengumuman/list")
     suspend fun getPengumuman(): ResponsePengumuman
@@ -44,25 +44,10 @@ interface ApiService {
     suspend fun getSettings(): ResponseSettings
 
     /**
-     * Laporan Keuangan Bentuk Table
-     */
-
-    @POST("report/neraca")
-    suspend fun getReportNeraca(@Body requestLapKeu: RequestLapKeu?)
-
-
-    /**
      * Laporan Keuangan
      */
 
     @POST("kirim/keuangan/get")
     suspend fun getListKantor(@Body requestLapKeu: RequestLapKeu) : ResponseListKantor
-
-
-    /**
-     * testing data
-     */
-    @GET("get_latest_news")
-    suspend fun getLatestNews(): ResponsePengumumanDummy
 
 }

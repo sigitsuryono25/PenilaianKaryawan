@@ -6,6 +6,35 @@
     android:layout_height="match_parent"
     tools:context=".main.monitoring.MonitoringFragment">
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/containerTahun"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pilih Tahun"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+            <Spinner
+                android:id="@+id/dropDownTahun"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:spinnerMode="dialog" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
     <ImageView
         android:id="@+id/cover"
         android:layout_width="match_parent"
@@ -18,11 +47,12 @@
         android:src="@drawable/bg_profile" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
+        android:layout_below="@id/containerTahun"
         android:id="@+id/daftarPenilaian"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_margin="8dp"
-        tools:listitem="@layout/item_adapter_daftar_penilaian"
-        android:layout_height="match_parent"/>
+        tools:listitem="@layout/item_adapter_daftar_penilaian" />
 
 
 </RelativeLayout>
